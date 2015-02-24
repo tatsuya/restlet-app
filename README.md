@@ -26,7 +26,18 @@ By default the application is launched at `http://localhost:9000`.
 
 ## Usage
 
-Right now the following two GET operations are only implemented.
+### Create a resource
+
+`POST http://localhost:9000/tricks/`
+
+```
+{
+  "name": "Ollie",
+  "description": "A trick in which the snowboarder springs off the tail of the board and into the air."
+}
+```
+
+The returned status is : `201 Created`. Note that the location of the created resource is written in the `Location` HTTP header.
 
 ### Retrieve all resources
 

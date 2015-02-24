@@ -1,14 +1,24 @@
-package com.tatsuyaoiw.restlet.representation;
+package com.tatsuyaoiw.restlet.persistence.entity;
 
 /**
- * Acts as container for the representation of a trick.<br>
- * It is mainly used in order to gain fine control on the way we generate XML
- * and JSON document via Jackson.<br>
+ * Represents a trick.
  */
-public class TrickRepresentation {
+public class Trick {
+
+	// Technical identifier
+	private String id;
 
 	private String name;
+
 	private String description;
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
 
 	public String getName() {
 		return name;
@@ -25,5 +35,4 @@ public class TrickRepresentation {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-
 }
