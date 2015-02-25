@@ -30,7 +30,7 @@ By default the application is launched at `http://localhost:9000`.
 
 `POST http://localhost:9000/tricks/`
 
-```
+```json
 {
   "name": "Ollie",
   "description": "A trick in which the snowboarder springs off the tail of the board and into the air."
