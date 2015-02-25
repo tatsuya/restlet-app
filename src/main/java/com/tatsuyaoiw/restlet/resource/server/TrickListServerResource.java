@@ -8,8 +8,6 @@ import com.tatsuyaoiw.restlet.representation.TrickRepresentation;
 import com.tatsuyaoiw.restlet.resource.TrickListResource;
 import com.tatsuyaoiw.restlet.utils.TrickUtils;
 import org.restlet.data.Status;
-import org.restlet.ext.jackson.JacksonRepresentation;
-import org.restlet.representation.Representation;
 import org.restlet.resource.ResourceException;
 import org.restlet.resource.ServerResource;
 
@@ -33,7 +31,7 @@ public class TrickListServerResource extends ServerResource implements TrickList
 	}
 
 	@Override
-	public Representation getTricks() {
+	public List<TrickRepresentation> getTricks() {
 		getLogger().finer("Retrieve the list of tricks");
 
 		List<Trick> tricks = trickPersistence.findAll();
@@ -45,7 +43,7 @@ public class TrickListServerResource extends ServerResource implements TrickList
 
 		getLogger().finer("List of tricks successfully retrieved.");
 
-		return new JacksonRepresentation<List<TrickRepresentation>>(trickReprs);
+		return trickReprs;
 	}
 
 	@Override

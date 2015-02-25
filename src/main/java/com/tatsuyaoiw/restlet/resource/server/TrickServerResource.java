@@ -6,8 +6,6 @@ import com.tatsuyaoiw.restlet.persistence.entity.Trick;
 import com.tatsuyaoiw.restlet.representation.TrickRepresentation;
 import com.tatsuyaoiw.restlet.resource.TrickResource;
 import com.tatsuyaoiw.restlet.utils.TrickUtils;
-import org.restlet.ext.jackson.JacksonRepresentation;
-import org.restlet.representation.Representation;
 import org.restlet.resource.ResourceException;
 import org.restlet.resource.ServerResource;
 
@@ -33,14 +31,14 @@ public class TrickServerResource extends ServerResource implements TrickResource
 	}
 
 	@Override
-	public Representation getTrick() {
+	public TrickRepresentation getTrick() {
 		getLogger().finer("Retrieve a trick");
 
-		Representation json = new JacksonRepresentation<TrickRepresentation>(TrickUtils.toTrickRepresentation(trick));
+		TrickRepresentation trickRepr = TrickUtils.toTrickRepresentation(trick);
 
 		getLogger().finer("Trick successfully retrieved");
 
-		return json;
+		return trickRepr;
 	}
 
 }
