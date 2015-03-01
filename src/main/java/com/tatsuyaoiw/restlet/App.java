@@ -15,12 +15,20 @@ public class App extends Application {
 
 	public static final Logger LOGGER = Engine.getLogger(Application.class);
 
+	private static final int DEFAULT_PORT = 9000;
+
 	public static void main(String[] args) throws Exception {
 		LOGGER.info("Starting application...");
 
-		// Create a new Restlet component and add a HTTP server connector to it
+		// Create a new Restlet component
 		Component component = new Component();
-		component.getServers().add(Protocol.HTTP, 9000);
+
+		// Add a HTTP server connector to it
+		int port = DEFAULT_PORT;
+		if (System.getenv("PORT") != null) {
+			port = Integer.valueOf(System.getenv("PORT"));
+		}
+		component.getServers().add(Protocol.HTTP, port);
 
 		// Then attach it to the local host
 		component.getDefaultHost().attach(new App());
@@ -28,7 +36,7 @@ public class App extends Application {
 		component.start();
 
 		LOGGER.info("Sample Restlet App started");
-		LOGGER.info("URL: http://localhost:9000");
+		LOGGER.info("URL: http://localhost:" + port);
 	}
 
 	@Override
