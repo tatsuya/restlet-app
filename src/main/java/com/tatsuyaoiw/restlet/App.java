@@ -1,5 +1,6 @@
 package com.tatsuyaoiw.restlet;
 
+import com.tatsuyaoiw.restlet.persistence.PersistenceService;
 import com.tatsuyaoiw.restlet.resource.server.TrickListServerResource;
 import com.tatsuyaoiw.restlet.resource.server.TrickServerResource;
 import org.restlet.Application;
@@ -19,6 +20,8 @@ public class App extends Application {
 
 	public static void main(String[] args) throws Exception {
 		LOGGER.info("Starting application...");
+
+		PersistenceService.initialize();
 
 		// Create a new Restlet component
 		Component component = new Component();

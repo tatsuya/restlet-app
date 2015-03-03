@@ -7,6 +7,8 @@ A sample RESTful API using Restlet, learned from [restlet/restlet-tutorial](http
 - Maven installed on your machine: [Maven documentation link](http://maven.apache.org/)
 - Git installed on your machine
 
+This example uses [Restlet Framework 2.3.1][restlet] (Java SE edition) and [MongoDB][mongodb].
+
 ## Installation
 
 ### Install Maven project
@@ -22,9 +24,17 @@ For further instruction about running a Maven project : [Building a project with
 
 The main class is: `App.java`
 
-By default the application is launched at `http://localhost:9000`.
+By default the application is launched at `http://localhost:9000`, but you can change it in `App.java`.
+
+You can interact with this application easily using a REST client like [POSTMAN][postman].
+
+## Database access
+
+To interact with the database you can use `mongo` shell for MongoDB.
 
 ## Usage
+
+These examples are made using the JSON format but you can use XML or YAML if you want.
 
 ### Create a resource
 
@@ -72,3 +82,7 @@ It should retrieve:
   "description": "A trick in which the snowboarder springs off the tail of the board and into the air."
 }
 ```
+
+[restlet]: http://restlet.com/download/current
+[mongodb]: http://www.mongodb.org/
+[postman]: http://www.getpostman.com/

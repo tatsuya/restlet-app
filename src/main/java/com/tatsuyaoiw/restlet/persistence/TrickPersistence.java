@@ -1,8 +1,10 @@
 package com.tatsuyaoiw.restlet.persistence;
 
+import com.mongodb.*;
 import com.tatsuyaoiw.restlet.persistence.entity.Trick;
 import org.restlet.Context;
 
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -27,9 +29,13 @@ public class TrickPersistence extends PersistenceService<Trick> {
 	public Trick add(Trick trick) {
 		Context.getCurrentLogger().finer("Method add() of TrickPersistence called.");
 
-		String id = UUID.randomUUID().toString();
-		trick.setId(id);
-		persistence.put(id, trick);
+		BasicDBObject doc = new BasicDBObject("name", trick.getName())
+				.append("description", trick.getDescription());
+		getCollection().insert(doc);
+
+//		String id = UUID.randomUUID().toString();
+//		trick.setId(id);
+//		persistence.put(id, trick);
 
 		Context.getCurrentLogger().finer("Method add() of TrickPersistence finished.");
 		return trick;
@@ -39,7 +45,22 @@ public class TrickPersistence extends PersistenceService<Trick> {
 	public List<Trick> findAll() {
 		Context.getCurrentLogger().finer("Method findAll() of TrickPersistence called");
 
-		List<Trick> tricks = new ArrayList<Trick>(persistence.values());
+		List<Trick> tricks = new ArrayList<Trick>();
+
+		DBCursor cursor = getCollection().find();
+		try {
+			while (cursor.hasNext()) {
+				DBObject doc = cursor.next();
+				Trick trick = new Trick();
+				trick.setName(doc.get("name").toString());
+				trick.setDescription(doc.get("description").toString());
+				tricks.add(trick);
+			}
+		} finally {
+			cursor.close();
+		}
+
+//		List<Trick> tricks = new ArrayList<Trick>(persistence.values());
 
 		Context.getCurrentLogger().finer("Method findAll() of TrickPersistence called");
 
