@@ -20,6 +20,7 @@ public class TrickUtils {
 			return null;
 		}
 		TrickRepresentation trickRepr = new TrickRepresentation();
+		trickRepr.setId(trick.getId());
 		trickRepr.setName(trick.getName());
 		trickRepr.setDescription(trick.getDescription());
 		return trickRepr;

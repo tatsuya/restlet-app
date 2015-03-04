@@ -52,6 +52,7 @@ public class TrickPersistence extends PersistenceService<Trick> {
 			while (cursor.hasNext()) {
 				DBObject doc = cursor.next();
 				Trick trick = new Trick();
+				trick.setId(doc.get("_id").toString());
 				trick.setName(doc.get("name").toString());
 				trick.setDescription(doc.get("description").toString());
 				tricks.add(trick);
@@ -71,7 +72,21 @@ public class TrickPersistence extends PersistenceService<Trick> {
 	public Trick findById(String id) {
 		Context.getCurrentLogger().finer("Method findById() of TrickPersistence called");
 
-		Trick trick = persistence.get(id);
+//		Trick trick = persistence.get(id);
+
+		BasicDBObject query = new BasicDBObject("_id", id);
+
+		DBCursor cursor = getCollection().find(query);
+		DBObject doc = cursor.one();
+		cursor.close();
+
+		if (doc == null) {
+			return null;
+		}
+		Trick trick = new Trick();
+		trick.setId(doc.get("_id").toString());
+		trick.setName(doc.get("name").toString());
+		trick.setDescription(doc.get("description").toString());
 
 		Context.getCurrentLogger().finer("Method findById() of TrickPersistence finished.");
 
