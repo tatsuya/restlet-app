@@ -2,5 +2,5 @@
 target/
 
 ### JetBrains
-restlet-app.iml
+*.iml
 .idea/
