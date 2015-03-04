@@ -1,15 +1,15 @@
 package com.tatsuyaoiw.restlet.persistence;
 
-import com.mongodb.*;
+import com.mongodb.BasicDBObject;
+import com.mongodb.DBCursor;
+import com.mongodb.DBObject;
 import com.tatsuyaoiw.restlet.persistence.entity.Trick;
 import org.restlet.Context;
 
-import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 public class TrickPersistence extends PersistenceService<Trick> {
 
@@ -32,6 +32,7 @@ public class TrickPersistence extends PersistenceService<Trick> {
 		BasicDBObject doc = new BasicDBObject("name", trick.getName())
 				.append("description", trick.getDescription());
 		getCollection().insert(doc);
+		trick.setId(doc.get("_id").toString());
 
 //		String id = UUID.randomUUID().toString();
 //		trick.setId(id);

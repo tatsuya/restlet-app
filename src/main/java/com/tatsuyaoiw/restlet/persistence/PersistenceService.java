@@ -2,7 +2,6 @@ package com.tatsuyaoiw.restlet.persistence;
 
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
-import com.mongodb.Mongo;
 import com.mongodb.MongoClient;
 import org.restlet.Context;
 
