@@ -1,7 +1,8 @@
 package com.tatsuyaoiw.restlet.resource.server;
 
+import com.tatsuyaoiw.restlet.AppConfig;
+import com.tatsuyaoiw.restlet.persistence.Persistence;
 import com.tatsuyaoiw.restlet.persistence.PersistenceService;
-import com.tatsuyaoiw.restlet.persistence.TrickPersistence;
 import com.tatsuyaoiw.restlet.persistence.entity.Trick;
 import com.tatsuyaoiw.restlet.representation.TrickRepresentation;
 import com.tatsuyaoiw.restlet.resource.TrickResource;
@@ -11,7 +12,7 @@ import org.restlet.resource.ServerResource;
 
 public class TrickServerResource extends ServerResource implements TrickResource {
 
-	private TrickPersistence trickPersistence;
+	private Persistence<Trick> trickPersistence;
 
 	private Trick trick;
 
@@ -21,7 +22,7 @@ public class TrickServerResource extends ServerResource implements TrickResource
 
 		getLogger().finer("Initialization of TrickServerResource with trick id: " + id);
 
-		trickPersistence = PersistenceService.getTrickPersistence();
+		trickPersistence = PersistenceService.getTrickPersistence(AppConfig.STORAGE);
 
 		trick = trickPersistence.findById(id);
 

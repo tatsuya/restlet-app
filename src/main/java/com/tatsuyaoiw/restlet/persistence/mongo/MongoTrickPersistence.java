@@ -1,29 +1,25 @@
-package com.tatsuyaoiw.restlet.persistence;
+package com.tatsuyaoiw.restlet.persistence.mongo;
 
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
+import com.tatsuyaoiw.restlet.persistence.Persistence;
 import com.tatsuyaoiw.restlet.persistence.entity.Trick;
 import org.restlet.Context;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-public class TrickPersistence extends PersistenceService<Trick> {
-
-	// Fake persistent storage
-	private static Map<String, Trick> persistence = new HashMap<String, Trick>();
+public class MongoTrickPersistence extends MongoPersistenceService implements Persistence<Trick> {
 
 	// Singleton pattern
-	private static TrickPersistence trickPersistence = new TrickPersistence();
+	private static MongoTrickPersistence trickPersistence = new MongoTrickPersistence();
 
-	public static synchronized TrickPersistence getTrickPersistence() {
+	public static synchronized MongoTrickPersistence getTrickPersistence() {
 		return trickPersistence;
 	}
 
-	private TrickPersistence() {}
+	private MongoTrickPersistence() {}
 
 	@Override
 	public Trick add(Trick trick) {
@@ -33,10 +29,6 @@ public class TrickPersistence extends PersistenceService<Trick> {
 				.append("description", trick.getDescription());
 		getCollection().insert(doc);
 		trick.setId(doc.get("_id").toString());
-
-//		String id = UUID.randomUUID().toString();
-//		trick.setId(id);
-//		persistence.put(id, trick);
 
 		Context.getCurrentLogger().finer("Method add() of TrickPersistence finished.");
 		return trick;
@@ -62,8 +54,6 @@ public class TrickPersistence extends PersistenceService<Trick> {
 			cursor.close();
 		}
 
-//		List<Trick> tricks = new ArrayList<Trick>(persistence.values());
-
 		Context.getCurrentLogger().finer("Method findAll() of TrickPersistence called");
 
 		return tricks;
@@ -72,8 +62,6 @@ public class TrickPersistence extends PersistenceService<Trick> {
 	@Override
 	public Trick findById(String id) {
 		Context.getCurrentLogger().finer("Method findById() of TrickPersistence called");
-
-//		Trick trick = persistence.get(id);
 
 		BasicDBObject query = new BasicDBObject("_id", id);
 

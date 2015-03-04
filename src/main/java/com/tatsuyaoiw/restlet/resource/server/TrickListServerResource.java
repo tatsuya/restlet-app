@@ -1,8 +1,9 @@
 package com.tatsuyaoiw.restlet.resource.server;
 
+import com.tatsuyaoiw.restlet.AppConfig;
 import com.tatsuyaoiw.restlet.core.util.ResourceUtils;
+import com.tatsuyaoiw.restlet.persistence.Persistence;
 import com.tatsuyaoiw.restlet.persistence.PersistenceService;
-import com.tatsuyaoiw.restlet.persistence.TrickPersistence;
 import com.tatsuyaoiw.restlet.persistence.entity.Trick;
 import com.tatsuyaoiw.restlet.representation.TrickRepresentation;
 import com.tatsuyaoiw.restlet.resource.TrickListResource;
@@ -16,16 +17,16 @@ import java.util.List;
 
 public class TrickListServerResource extends ServerResource implements TrickListResource {
 
-	private TrickPersistence trickPersistence;
+	private Persistence<Trick> trickPersistence;
 
 	/**
-	 * Method called at the creation of the Resouces (ie : each time the resource is called).
+	 * Method called at the creation of the Resources (ie : each time the resource is called).
 	 */
 	@Override
 	protected void doInit() throws ResourceException {
 		getLogger().finer("Initialization of TrickListServerResource.");
 
-		trickPersistence = PersistenceService.getTrickPersistence();
+		trickPersistence = PersistenceService.getTrickPersistence(AppConfig.STORAGE);
 
 		getLogger().finer("Initialization of TrickListServerResource ended.");
 	}

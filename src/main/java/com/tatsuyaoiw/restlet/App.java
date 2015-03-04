@@ -21,7 +21,7 @@ public class App extends Application {
 	public static void main(String[] args) throws Exception {
 		LOGGER.info("Starting application...");
 
-		PersistenceService.initialize();
+		PersistenceService.initialize(AppConfig.STORAGE);
 
 		// Create a new Restlet component
 		Component component = new Component();
@@ -48,6 +48,10 @@ public class App extends Application {
 	}
 
 	private Router createApiRouter() {
+		// Attach server resources to the given URL template.
+		// For instance, TrickListServerResource is attached
+		// to http://localhost:9000/tricks
+		// and to http://localhost:9000/tricks/
 		Router router = new Router(getContext());
 
 		router.attach("/tricks", TrickListServerResource.class);
