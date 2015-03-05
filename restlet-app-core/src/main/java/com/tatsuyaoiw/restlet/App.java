@@ -1,5 +1,6 @@
 package com.tatsuyaoiw.restlet;
 
+
 import com.tatsuyaoiw.restlet.persistence.PersistenceService;
 import com.tatsuyaoiw.restlet.resource.server.TrickListServerResource;
 import com.tatsuyaoiw.restlet.resource.server.TrickServerResource;
@@ -16,9 +17,13 @@ public class App extends Application {
 
 	public static final Logger LOGGER = Engine.getLogger(Application.class);
 
-	private static final int DEFAULT_PORT = 9000;
+	private static final int DEFAULT_HTTP_PORT = 9000;
 
-	public static void main(String[] args) throws Exception {
+	public static Component createApp() {
+		return createApp(DEFAULT_HTTP_PORT);
+	}
+
+	public static Component createApp(int defaultPort) {
 		LOGGER.info("Starting application...");
 
 		PersistenceService.initialize(AppConfig.STORAGE);
@@ -26,20 +31,18 @@ public class App extends Application {
 		// Create a new Restlet component
 		Component component = new Component();
 
-		// Add a HTTP server connector to it
-		int port = DEFAULT_PORT;
+		int port = defaultPort;
 		if (System.getenv("PORT") != null) {
 			port = Integer.valueOf(System.getenv("PORT"));
 		}
+
+		// Add a HTTP server connector to it
 		component.getServers().add(Protocol.HTTP, port);
 
 		// Then attach it to the local host
 		component.getDefaultHost().attach(new App());
 
-		component.start();
-
-		LOGGER.info("Sample Restlet App started");
-		LOGGER.info("URL: http://localhost:" + port);
+		return component;
 	}
 
 	@Override
