@@ -18,17 +18,23 @@ public class TrickServerResource extends ServerResource implements TrickResource
 
 	@Override
 	protected void doInit() throws ResourceException {
+		// Get trick related to given id
 		String id = getAttribute("id");
 
 		getLogger().finer("Initialization of TrickServerResource with trick id: " + id);
 
+		// Initialize the persistence layer
 		trickPersistence = PersistenceService.getTrickPersistence(AppConfig.STORAGE);
 
 		trick = trickPersistence.findById(id);
 
-		if (trick == null) {
-			throw new IllegalArgumentException("Trick id does not exist: " + id);
+		// Check if retrieved trick is not null. If it is null it means that the given id is wrong.
+		setExisting(trick != null);
+		if (!isExisting()) {
+			getLogger().config("Trick id does not exist: " + id);
 		}
+
+		getLogger().finer("Initialization of TrickServerResource ended with trick id: " + id);
 	}
 
 	@Override
@@ -40,6 +46,21 @@ public class TrickServerResource extends ServerResource implements TrickResource
 		getLogger().finer("Trick successfully retrieved");
 
 		return trickRepr;
+	}
+
+	@Override
+	public void remove() {
+		getLogger().finer("Removal of trick");
+
+		// Remove trick in DB
+		Boolean isRemoved = trickPersistence.remove(trick.getId());
+
+		if (!isRemoved) {
+			getLogger().finer("Trick id does not exist");
+			throw new IllegalArgumentException("Trick with the following identifier does not exist: " + trick.getId());
+		}
+
+		getLogger().finer("Trick successfully removed.");
 	}
 
 }

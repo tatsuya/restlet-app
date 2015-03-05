@@ -28,7 +28,19 @@ public class MemoryTrickPersistence extends MemoryPersistenceService implements 
 		getPersistence().put(id, trick);
 
 		Context.getCurrentLogger().finer("Method add() of TrickPersistence finished.");
+
 		return trick;
+	}
+
+	@Override
+	public Boolean remove(String id) {
+		Context.getCurrentLogger().finer("Method remove() of TrickPersistence called");
+
+		Trick trick = getPersistence().remove(id);
+
+		Context.getCurrentLogger().finer("Method remove() of TrickPersistence finished");
+
+		return trick != null;
 	}
 
 	@Override

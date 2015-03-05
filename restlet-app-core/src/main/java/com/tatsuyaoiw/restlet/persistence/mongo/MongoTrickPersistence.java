@@ -3,8 +3,10 @@ package com.tatsuyaoiw.restlet.persistence.mongo;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
+import com.mongodb.WriteResult;
 import com.tatsuyaoiw.restlet.persistence.Persistence;
 import com.tatsuyaoiw.restlet.persistence.entity.Trick;
+import org.bson.types.ObjectId;
 import org.restlet.Context;
 
 import java.util.ArrayList;
@@ -32,6 +34,19 @@ public class MongoTrickPersistence extends MongoPersistenceService implements Pe
 
 		Context.getCurrentLogger().finer("Method add() of TrickPersistence finished.");
 		return trick;
+	}
+
+	@Override
+	public Boolean remove(String id) {
+		Context.getCurrentLogger().finer("Method remove() of TrickPersistence called");
+
+		BasicDBObject query = new BasicDBObject("_id", new ObjectId(id));
+		WriteResult result = getCollection().remove(query);
+
+		Context.getCurrentLogger().finer("Method remove() of TrickPersistence finished");
+
+		int n = result.getN();
+		return n != 0;
 	}
 
 	@Override
@@ -63,7 +78,7 @@ public class MongoTrickPersistence extends MongoPersistenceService implements Pe
 	public Trick findById(String id) {
 		Context.getCurrentLogger().finer("Method findById() of TrickPersistence called");
 
-		BasicDBObject query = new BasicDBObject("_id", id);
+		BasicDBObject query = new BasicDBObject("_id", new ObjectId(id));
 
 		DBCursor cursor = getCollection().find(query);
 		DBObject doc = cursor.one();

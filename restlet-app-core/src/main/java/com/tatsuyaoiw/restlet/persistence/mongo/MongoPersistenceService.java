@@ -11,6 +11,9 @@ public abstract class MongoPersistenceService {
 
 	private static MongoClient client;
 
+	private static final String DB_NAME = "mydb";
+	private static final String COLLECTION_NAME = "testCollection";
+
 	public static void initialize() {
 		try {
 			client = new MongoClient();
@@ -26,12 +29,12 @@ public abstract class MongoPersistenceService {
 		}
 		// At this point, the db object will be a connection to a MongoDB server
 		// for the specified database. With it, you can do further operations.
-		return client.getDB("mydb");
+		return client.getDB(DB_NAME);
 	}
 
 	protected DBCollection getCollection() {
 		Context.getCurrentLogger().finer("Get a collection to use");
-		DBCollection collection = getDB().getCollection("testCollection");
+		DBCollection collection = getDB().getCollection(COLLECTION_NAME);
 		Context.getCurrentLogger().finer("Got a collection to use");
 		return collection;
 	}
