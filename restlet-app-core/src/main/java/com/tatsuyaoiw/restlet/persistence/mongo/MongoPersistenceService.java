@@ -3,9 +3,12 @@ package com.tatsuyaoiw.restlet.persistence.mongo;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.MongoClient;
+import com.mongodb.MongoCredential;
+import com.mongodb.ServerAddress;
 import org.restlet.Context;
 
 import java.net.UnknownHostException;
+import java.util.Arrays;
 
 public abstract class MongoPersistenceService {
 
@@ -15,8 +18,15 @@ public abstract class MongoPersistenceService {
 	private static final String COLLECTION_NAME = "testCollection";
 
 	public static void initialize() {
+		MongoConfig config = new MongoConfig();
 		try {
-			client = new MongoClient();
+			ServerAddress server = config.createServerAddress();
+			MongoCredential credential = config.createCredential();
+			if (credential == null) {
+				client = new MongoClient(server);
+			} else {
+				client = new MongoClient(server, Arrays.asList(credential));
+			}
 		} catch (UnknownHostException e) {
 			throw new RuntimeException(e);
 		}
