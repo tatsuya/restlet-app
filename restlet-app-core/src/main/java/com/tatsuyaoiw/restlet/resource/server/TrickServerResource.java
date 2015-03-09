@@ -16,10 +16,12 @@ public class TrickServerResource extends ServerResource implements TrickResource
 
 	private Trick trick;
 
+	private String id;
+
 	@Override
 	protected void doInit() throws ResourceException {
 		// Get trick related to given id
-		String id = getAttribute("id");
+		id = getAttribute("id");
 
 		getLogger().finer("Initialization of TrickServerResource with trick id: " + id);
 
@@ -53,14 +55,31 @@ public class TrickServerResource extends ServerResource implements TrickResource
 		getLogger().finer("Removal of trick");
 
 		// Remove trick in DB
-		Boolean isRemoved = trickPersistence.remove(trick.getId());
+		Boolean isRemoved = trickPersistence.remove(id);
 
 		if (!isRemoved) {
 			getLogger().finer("Trick id does not exist");
-			throw new IllegalArgumentException("Trick with the following identifier does not exist: " + trick.getId());
+			throw new IllegalArgumentException("Trick with the following identifier does not exist: " + id);
 		}
 
-		getLogger().finer("Trick successfully removed.");
+		getLogger().finer("Trick successfully removed");
+	}
+
+	@Override
+	public TrickRepresentation update(TrickRepresentation trickReprIn) {
+		getLogger().finer("Update a trick");
+
+		Trick trickIn = TrickUtils.toTrick(trickReprIn);
+
+		if (!isExisting()) {
+			throw new IllegalArgumentException("Trick with the following id does not exist: " + id);
+		}
+
+		Trick trickOut = trickPersistence.update(id, trickIn);
+
+		getLogger().finer("Trick successfully updated");
+
+		return TrickUtils.toTrickRepresentation(trickOut);
 	}
 
 }

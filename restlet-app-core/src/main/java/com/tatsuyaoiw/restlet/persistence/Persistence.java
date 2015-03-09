@@ -33,4 +33,13 @@ public interface Persistence<T> {
 	 * @return The found entity.
 	 */
 	T findById(String id);
+
+	/**
+	 * Update an existing entity.
+	 *
+	 * @param id The identifier of the entity to update.
+	 * @param toUpdate The new state of the entity
+	 * @return The updated entity.
+	 */
+	T update(String id, T toUpdate);
 }

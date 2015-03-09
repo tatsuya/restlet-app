@@ -92,7 +92,22 @@ public class MongoTrickPersistence extends MongoPersistenceService implements Pe
 		trick.setName(doc.get("name").toString());
 		trick.setDescription(doc.get("description").toString());
 
-		Context.getCurrentLogger().finer("Method findById() of MongoTrickPersistence finished.");
+		Context.getCurrentLogger().finer("Method findById() of MongoTrickPersistence finished");
+
+		return trick;
+	}
+
+	@Override
+	public Trick update(String id, Trick trick) {
+		Context.getCurrentLogger().finer("Method update() of MongoTrickPersistence called");
+
+		BasicDBObject query = new BasicDBObject("_id", new ObjectId(id));
+		BasicDBObject doc = new BasicDBObject("name", trick.getName())
+				.append("description", trick.getDescription());
+		getCollection().update(query, doc);
+		trick.setId(query.get("_id").toString());
+
+		Context.getCurrentLogger().finer("Method update() of MongoTrickPersistence finished");
 
 		return trick;
 	}
