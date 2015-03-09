@@ -3,6 +3,7 @@ package com.tatsuyaoiw.restlet.persistence.mongo;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.MongoClient;
+import com.mongodb.MongoClientOptions;
 import com.mongodb.MongoCredential;
 import com.mongodb.ServerAddress;
 import org.restlet.Context;
@@ -22,15 +23,16 @@ public abstract class MongoPersistenceService {
 		try {
 			ServerAddress server = config.createServerAddress();
 			MongoCredential credential = config.createCredential();
+			MongoClientOptions options = new MongoClientOptions.Builder().connectTimeout(20000).build();
 			if (credential == null) {
-				client = new MongoClient(server);
+				client = new MongoClient(server, options);
 			} else {
-				client = new MongoClient(server, Arrays.asList(credential));
+				client = new MongoClient(server, Arrays.asList(credential), options);
 			}
 		} catch (UnknownHostException e) {
 			throw new RuntimeException(e);
 		}
-		Context.getCurrentLogger().finer("MongoDB persistent storage is initialized");
+		Context.getCurrentLogger().info("MongoDB persistent storage is initialized");
 	}
 
 	protected DB getDB() {

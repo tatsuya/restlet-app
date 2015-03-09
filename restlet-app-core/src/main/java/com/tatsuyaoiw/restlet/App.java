@@ -11,6 +11,7 @@ import org.restlet.data.Protocol;
 import org.restlet.engine.Engine;
 import org.restlet.routing.Router;
 
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class App extends Application {
@@ -24,6 +25,7 @@ public class App extends Application {
 	}
 
 	public static Component createApp(int defaultPort) {
+		Engine.setLogLevel(Level.FINER);
 		LOGGER.info("Starting application...");
 
 		PersistenceService.initialize(AppConfig.STORAGE);

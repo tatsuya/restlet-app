@@ -21,46 +21,46 @@ public class MemoryTrickPersistence extends MemoryPersistenceService implements 
 
 	@Override
 	public Trick add(Trick trick) {
-		Context.getCurrentLogger().finer("Method add() of TrickPersistence called.");
+		Context.getCurrentLogger().finer("Method add() of MemoryTrickPersistence called.");
 
 		String id = UUID.randomUUID().toString();
 		trick.setId(id);
 		getPersistence().put(id, trick);
 
-		Context.getCurrentLogger().finer("Method add() of TrickPersistence finished.");
+		Context.getCurrentLogger().finer("Method add() of MemoryTrickPersistence finished.");
 
 		return trick;
 	}
 
 	@Override
 	public Boolean remove(String id) {
-		Context.getCurrentLogger().finer("Method remove() of TrickPersistence called");
+		Context.getCurrentLogger().finer("Method remove() of MemoryTrickPersistence called");
 
 		Trick trick = getPersistence().remove(id);
 
-		Context.getCurrentLogger().finer("Method remove() of TrickPersistence finished");
+		Context.getCurrentLogger().finer("Method remove() of MemoryTrickPersistence finished");
 
 		return trick != null;
 	}
 
 	@Override
 	public List<Trick> findAll() {
-		Context.getCurrentLogger().finer("Method findAll() of TrickPersistence called");
+		Context.getCurrentLogger().finer("Method findAll() of MemoryTrickPersistence called");
 
 		List<Trick> tricks = new ArrayList<Trick>(getPersistence().values());
 
-		Context.getCurrentLogger().finer("Method findAll() of TrickPersistence called");
+		Context.getCurrentLogger().finer("Method findAll() of MemoryTrickPersistence called");
 
 		return tricks;
 	}
 
 	@Override
 	public Trick findById(String id) {
-		Context.getCurrentLogger().finer("Method findById() of TrickPersistence called");
+		Context.getCurrentLogger().finer("Method findById() of MemoryTrickPersistence called");
 
 		Trick trick = getPersistence().get(id);
 
-		Context.getCurrentLogger().finer("Method findById() of TrickPersistence finished.");
+		Context.getCurrentLogger().finer("Method findById() of MemoryTrickPersistence finished.");
 
 		return trick;
 	}

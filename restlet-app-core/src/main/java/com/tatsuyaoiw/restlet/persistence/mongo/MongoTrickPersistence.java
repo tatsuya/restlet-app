@@ -25,25 +25,25 @@ public class MongoTrickPersistence extends MongoPersistenceService implements Pe
 
 	@Override
 	public Trick add(Trick trick) {
-		Context.getCurrentLogger().finer("Method add() of TrickPersistence called.");
+		Context.getCurrentLogger().finer("Method add() of MongoTrickPersistence called.");
 
 		BasicDBObject doc = new BasicDBObject("name", trick.getName())
 				.append("description", trick.getDescription());
 		getCollection().insert(doc);
 		trick.setId(doc.get("_id").toString());
 
-		Context.getCurrentLogger().finer("Method add() of TrickPersistence finished.");
+		Context.getCurrentLogger().finer("Method add() of MongoTrickPersistence finished.");
 		return trick;
 	}
 
 	@Override
 	public Boolean remove(String id) {
-		Context.getCurrentLogger().finer("Method remove() of TrickPersistence called");
+		Context.getCurrentLogger().finer("Method remove() of MongoTrickPersistence called");
 
 		BasicDBObject query = new BasicDBObject("_id", new ObjectId(id));
 		WriteResult result = getCollection().remove(query);
 
-		Context.getCurrentLogger().finer("Method remove() of TrickPersistence finished");
+		Context.getCurrentLogger().finer("Method remove() of MongoTrickPersistence finished");
 
 		int n = result.getN();
 		return n != 0;
@@ -51,7 +51,7 @@ public class MongoTrickPersistence extends MongoPersistenceService implements Pe
 
 	@Override
 	public List<Trick> findAll() {
-		Context.getCurrentLogger().finer("Method findAll() of TrickPersistence called");
+		Context.getCurrentLogger().finer("Method findAll() of MongoTrickPersistence called");
 
 		List<Trick> tricks = new ArrayList<Trick>();
 
@@ -69,14 +69,14 @@ public class MongoTrickPersistence extends MongoPersistenceService implements Pe
 			cursor.close();
 		}
 
-		Context.getCurrentLogger().finer("Method findAll() of TrickPersistence called");
+		Context.getCurrentLogger().finer("Method findAll() of MongoTrickPersistence called");
 
 		return tricks;
 	}
 
 	@Override
 	public Trick findById(String id) {
-		Context.getCurrentLogger().finer("Method findById() of TrickPersistence called");
+		Context.getCurrentLogger().finer("Method findById() of MongoTrickPersistence called");
 
 		BasicDBObject query = new BasicDBObject("_id", new ObjectId(id));
 
@@ -92,7 +92,7 @@ public class MongoTrickPersistence extends MongoPersistenceService implements Pe
 		trick.setName(doc.get("name").toString());
 		trick.setDescription(doc.get("description").toString());
 
-		Context.getCurrentLogger().finer("Method findById() of TrickPersistence finished.");
+		Context.getCurrentLogger().finer("Method findById() of MongoTrickPersistence finished.");
 
 		return trick;
 	}
