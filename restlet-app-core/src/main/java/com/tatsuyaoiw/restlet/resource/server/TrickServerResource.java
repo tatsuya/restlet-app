@@ -1,6 +1,5 @@
 package com.tatsuyaoiw.restlet.resource.server;
 
-import com.tatsuyaoiw.restlet.AppConfig;
 import com.tatsuyaoiw.restlet.persistence.Persistence;
 import com.tatsuyaoiw.restlet.persistence.PersistenceService;
 import com.tatsuyaoiw.restlet.persistence.entity.Trick;
@@ -10,6 +9,13 @@ import com.tatsuyaoiw.restlet.utils.TrickUtils;
 import org.restlet.resource.ResourceException;
 import org.restlet.resource.ServerResource;
 
+/**
+ * The basic idea is that the application will be composed of resources, extending
+ * the org.restlet.resource.Resource class. Those sub-classed resources will be
+ * in charge of handling the incoming requests. One instance of resource subclass
+ * will be created for each request to handle, making sure that you don't have to
+ * care about concurrent access at this point of your application.
+ */
 public class TrickServerResource extends ServerResource implements TrickResource {
 
 	private Persistence<Trick> trickPersistence;
@@ -26,7 +32,7 @@ public class TrickServerResource extends ServerResource implements TrickResource
 		getLogger().finer("Initialization of TrickServerResource with trick id: " + id);
 
 		// Initialize the persistence layer
-		trickPersistence = PersistenceService.getTrickPersistence(AppConfig.STORAGE);
+		trickPersistence = PersistenceService.getTrickPersistence();
 
 		trick = trickPersistence.findById(id);
 

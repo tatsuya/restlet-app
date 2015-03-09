@@ -13,30 +13,30 @@ public class MemoryTrickPersistence extends MemoryPersistenceService implements 
 	// Singleton pattern
 	private static MemoryTrickPersistence trickPersistence = new MemoryTrickPersistence();
 
-	public static MemoryTrickPersistence getTrickPersistence() {
+	public static synchronized MemoryTrickPersistence getTrickPersistence() {
 		return trickPersistence;
 	}
 
 	private MemoryTrickPersistence() {}
 
 	@Override
-	public Trick add(Trick trick) {
+	public Trick add(Trick toAdd) {
 		Context.getCurrentLogger().finer("Method add() of MemoryTrickPersistence called.");
 
 		String id = UUID.randomUUID().toString();
-		trick.setId(id);
-		getPersistence().put(id, trick);
+		toAdd.setId(id);
+		getTricks().put(id, toAdd);
 
 		Context.getCurrentLogger().finer("Method add() of MemoryTrickPersistence finished.");
 
-		return trick;
+		return toAdd;
 	}
 
 	@Override
 	public Boolean remove(String id) {
 		Context.getCurrentLogger().finer("Method remove() of MemoryTrickPersistence called");
 
-		Trick trick = getPersistence().remove(id);
+		Trick trick = getTricks().remove(id);
 
 		Context.getCurrentLogger().finer("Method remove() of MemoryTrickPersistence finished");
 
@@ -47,7 +47,7 @@ public class MemoryTrickPersistence extends MemoryPersistenceService implements 
 	public List<Trick> findAll() {
 		Context.getCurrentLogger().finer("Method findAll() of MemoryTrickPersistence called");
 
-		List<Trick> tricks = new ArrayList<Trick>(getPersistence().values());
+		List<Trick> tricks = new ArrayList<Trick>(getTricks().values());
 
 		Context.getCurrentLogger().finer("Method findAll() of MemoryTrickPersistence called");
 
@@ -58,7 +58,7 @@ public class MemoryTrickPersistence extends MemoryPersistenceService implements 
 	public Trick findById(String id) {
 		Context.getCurrentLogger().finer("Method findById() of MemoryTrickPersistence called");
 
-		Trick trick = getPersistence().get(id);
+		Trick trick = getTricks().get(id);
 
 		Context.getCurrentLogger().finer("Method findById() of MemoryTrickPersistence finished");
 
@@ -66,15 +66,15 @@ public class MemoryTrickPersistence extends MemoryPersistenceService implements 
 	}
 
 	@Override
-	public Trick update(String id, Trick trick) {
+	public Trick update(String id, Trick toUpdate) {
 		Context.getCurrentLogger().finer("Method update() of MemoryTrickPersistence called");
 
-		trick.setId(id);
-		getPersistence().put(id, trick);
+		toUpdate.setId(id);
+		getTricks().put(id, toUpdate);
 
 		Context.getCurrentLogger().finer("Method update() of MemoryTrickPersistence finished");
 
-		return trick;
+		return toUpdate;
 	}
 
 }

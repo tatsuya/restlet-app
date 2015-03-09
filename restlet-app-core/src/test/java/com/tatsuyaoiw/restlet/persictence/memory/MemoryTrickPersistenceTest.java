@@ -22,76 +22,105 @@ public class MemoryTrickPersistenceTest {
 
 	@Test
 	public void testAdd() throws Exception {
-		MemoryTrickPersistence trickPersistence = MemoryTrickPersistence.getTrickPersistence();
+		MemoryTrickPersistence persistence = MemoryTrickPersistence.getTrickPersistence();
 
-		List<Trick> tricks = trickPersistence.findAll();
+		List<Trick> tricks = persistence.findAll();
 		Assert.assertEquals(0, tricks.size());
 
-		Trick trickIn = new Trick();
-		trickIn.setName(OLLIE);
-		trickIn.setDescription(OLLIE_DESC);
+		Trick toAdd = new Trick();
+		toAdd.setName(OLLIE);
+		toAdd.setDescription(OLLIE_DESC);
 
-		Trick trickOut = trickPersistence.add(trickIn);
-		Assert.assertNotNull(trickOut.getId());
-		Assert.assertEquals(OLLIE, trickOut.getName());
-		Assert.assertEquals(OLLIE_DESC, trickOut.getDescription());
+		Trick added = persistence.add(toAdd);
 
-		tricks = trickPersistence.findAll();
+		Assert.assertNotNull(added.getId());
+		Assert.assertEquals(OLLIE, added.getName());
+		Assert.assertEquals(OLLIE_DESC, added.getDescription());
+
+		tricks = persistence.findAll();
 		Assert.assertEquals(1, tricks.size());
+
+		Trick trick = tricks.get(0);
+		Assert.assertEquals(added.getId(), trick.getId());
+		Assert.assertEquals(OLLIE, trick.getName());
+		Assert.assertEquals(OLLIE_DESC, trick.getDescription());
 	}
 
 	@Test
 	public void testRemove() throws Exception {
-		MemoryTrickPersistence trickPersistence = MemoryTrickPersistence.getTrickPersistence();
+		MemoryTrickPersistence persistence = MemoryTrickPersistence.getTrickPersistence();
 
-		Trick trick = new Trick();
-		trick.setName(OLLIE);
-		trick.setDescription(OLLIE_DESC);
-		trickPersistence.add(trick);
+		Trick toAdd = new Trick();
+		toAdd.setName(OLLIE);
+		toAdd.setDescription(OLLIE_DESC);
 
-		List<Trick> tricks = trickPersistence.findAll();
+		Trick added = persistence.add(toAdd);
+
+		List<Trick> tricks = persistence.findAll();
 		Assert.assertEquals(1, tricks.size());
 
-		Boolean isRemoved = trickPersistence.remove(tricks.get(0).getId());
+		Boolean isRemoved = persistence.remove(added.getId());
 		Assert.assertTrue(isRemoved);
 
-		isRemoved = trickPersistence.remove(tricks.get(0).getId());
-		Assert.assertFalse(isRemoved);
+		isRemoved = persistence.remove(added.getId());
+		Assert.assertFalse("should already be removed", isRemoved);
 
-		tricks = trickPersistence.findAll();
+		tricks = persistence.findAll();
 		Assert.assertEquals(0, tricks.size());
 	}
 
 	@Test
+	public void testFindById() throws Exception {
+		MemoryTrickPersistence persistence = MemoryTrickPersistence.getTrickPersistence();
+
+		Trick toAdd = new Trick();
+		toAdd.setName(OLLIE);
+		toAdd.setDescription(OLLIE_DESC);
+
+		Trick added = persistence.add(toAdd);
+
+		List<Trick> tricks = persistence.findAll();
+		Assert.assertEquals(1, tricks.size());
+
+		Trick trick = persistence.findById(added.getId());
+		Assert.assertEquals(added.getId(), trick.getId());
+		Assert.assertEquals(OLLIE, trick.getName());
+		Assert.assertEquals(OLLIE_DESC, trick.getDescription());
+	}
+
+	@Test
 	public void testUpdate() throws Exception {
-		MemoryTrickPersistence trickPersistence = MemoryTrickPersistence.getTrickPersistence();
+		MemoryTrickPersistence persistence = MemoryTrickPersistence.getTrickPersistence();
 
-		List<Trick> tricks = trickPersistence.findAll();
-		Assert.assertEquals(0, tricks.size());
+		Trick toAdd = new Trick();
+		toAdd.setName(OLLIE);
+		toAdd.setDescription(OLLIE_DESC);
 
-		Trick trickToAdd = new Trick();
-		trickToAdd.setName(OLLIE);
-		trickToAdd.setDescription(OLLIE_DESC);
+		Trick added = persistence.add(toAdd);
 
-		Trick trickAdded = trickPersistence.add(trickToAdd);
-		Assert.assertNotNull(trickAdded.getId());
-		Assert.assertEquals(OLLIE, trickAdded.getName());
-		Assert.assertEquals(OLLIE_DESC, trickAdded.getDescription());
+		Assert.assertNotNull(added.getId());
+		Assert.assertEquals(OLLIE, added.getName());
+		Assert.assertEquals(OLLIE_DESC, added.getDescription());
 
-		tricks = trickPersistence.findAll();
+		List<Trick> tricks = persistence.findAll();
 		Assert.assertEquals(1, tricks.size());
 
-		Trick trickToUpdate = new Trick();
-		trickToUpdate.setName(NOLLIE);
-		trickToUpdate.setDescription(NOLLIE_DESC);
+		Trick toUpdate = new Trick();
+		toUpdate.setName(NOLLIE);
+		toUpdate.setDescription(NOLLIE_DESC);
 
-		Trick trickUpdated = trickPersistence.update(trickAdded.getId(), trickToUpdate);
-		Assert.assertEquals(trickAdded.getId(), trickUpdated.getId());
-		Assert.assertEquals(NOLLIE, trickUpdated.getName());
-		Assert.assertEquals(NOLLIE_DESC, trickUpdated.getDescription());
+		Trick updated = persistence.update(added.getId(), toUpdate);
+		Assert.assertEquals(added.getId(), updated.getId());
+		Assert.assertEquals(NOLLIE, updated.getName());
+		Assert.assertEquals(NOLLIE_DESC, updated.getDescription());
 
-		tricks = trickPersistence.findAll();
+		tricks = persistence.findAll();
 		Assert.assertEquals(1, tricks.size());
+
+		Trick trick = tricks.get(0);
+		Assert.assertEquals(updated.getId(), trick.getId());
+		Assert.assertEquals(NOLLIE, trick.getName());
+		Assert.assertEquals(NOLLIE_DESC, trick.getDescription());
 	}
 
 }
