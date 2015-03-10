@@ -2,6 +2,7 @@ package com.tatsuyaoiw.restlet;
 
 
 import com.tatsuyaoiw.restlet.persistence.PersistenceService;
+import com.tatsuyaoiw.restlet.resource.server.MovieListServerResource;
 import com.tatsuyaoiw.restlet.resource.server.TrickListServerResource;
 import com.tatsuyaoiw.restlet.resource.server.TrickServerResource;
 import org.restlet.Application;
@@ -62,6 +63,9 @@ public class App extends Application {
 		router.attach("/tricks", TrickListServerResource.class);
 		router.attach("/tricks/", TrickListServerResource.class);
 		router.attach("/tricks/{id}", TrickServerResource.class);
+
+		router.attach("/movies", MovieListServerResource.class);
+		router.attach("/movies/", MovieListServerResource.class);
 
 		return router;
 	}

@@ -32,7 +32,7 @@ public abstract class MongoPersistenceService {
 		} catch (UnknownHostException e) {
 			throw new RuntimeException(e);
 		}
-		Context.getCurrentLogger().info("MongoDB persistent storage is initialized");
+		Context.getCurrentLogger().finer("MongoDB persistent storage is initialized");
 	}
 
 	protected DB getDB() {
