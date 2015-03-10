@@ -101,4 +101,5 @@ public class TrickServerResourceTest {
 		Assert.assertEquals(NAME_2, trick.getName());
 		Assert.assertEquals(DESC_2, trick.getDescription());
 	}
+
 }

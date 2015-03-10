@@ -38,9 +38,6 @@ public class TrickServerResource extends ServerResource implements TrickResource
 
 		// Check if retrieved trick is not null. If it is null it means that the given id is wrong.
 		setExisting(trick != null);
-		if (!isExisting()) {
-			getLogger().finer("Trick id does not exist: " + id);
-		}
 
 		getLogger().finer("Initialization of TrickServerResource ended with trick id: " + id);
 	}
