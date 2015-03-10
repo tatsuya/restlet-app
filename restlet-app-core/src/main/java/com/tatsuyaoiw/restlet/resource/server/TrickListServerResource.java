@@ -48,7 +48,7 @@ public class TrickListServerResource extends ServerResource implements TrickList
 
 	@Override
 	public TrickRepresentation add(TrickRepresentation trickRepr) {
-		getLogger().finer("Add a new trick.");
+		getLogger().finer("Add a new trick");
 
 		// Convert TrickRepresentation to Trick
 		Trick trickIn = TrickUtils.toTrick(trickRepr);
@@ -61,7 +61,7 @@ public class TrickListServerResource extends ServerResource implements TrickList
 		getResponse().setLocationRef(ResourceUtils.getTrickUrl(trickOut.getId()));
 		getResponse().setStatus(Status.SUCCESS_CREATED);
 
-		getLogger().finer("Tick successfully added.");
+		getLogger().finer("Trick successfully added");
 
 		return result;
 	}

@@ -11,4 +11,15 @@ public class ResourceUtils {
 	public static String getTrickUrl(String id) {
 		return "/tricks/" + id;
 	}
+
+	/**
+	 * Returns the URL of the resource that represents a movie.
+	 *
+	 * @param id The identifier of the movie.
+	 * @return The URL of the resource that represents a movie.
+	 */
+	public static String getMovieUrl(String id) {
+		return "/contacts/" + id;
+	}
+
 }

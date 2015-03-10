@@ -32,7 +32,7 @@ public abstract class PersistenceService {
 
 	private static void checkStorage() {
 		if (STORAGE == null) {
-			throw new IllegalStateException("Storage is not initialized");
+			throw new IllegalStateException("Storage must be initialized");
 		}
 	}
 

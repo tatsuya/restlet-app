@@ -122,4 +122,5 @@ public class MemoryMoviePersistenceTest {
 		Assert.assertEquals(TITLE_2, movie.getTitle());
 		Assert.assertEquals(URL_2, movie.getUrl());
 	}
+
 }
