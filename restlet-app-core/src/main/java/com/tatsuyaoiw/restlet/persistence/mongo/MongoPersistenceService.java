@@ -16,7 +16,6 @@ public abstract class MongoPersistenceService {
 	private static MongoClient client;
 
 	private static final String DB_NAME = "mydb";
-	private static final String COLLECTION_NAME = "testCollection";
 
 	public static void initialize() {
 		MongoConfig config = new MongoConfig();
@@ -35,7 +34,7 @@ public abstract class MongoPersistenceService {
 		Context.getCurrentLogger().finer("MongoDB persistent storage is initialized");
 	}
 
-	protected DB getDB() {
+	private DB getDB() {
 		if (client == null) {
 			throw new RuntimeException("MongoClient must be initialized");
 		}
@@ -44,10 +43,10 @@ public abstract class MongoPersistenceService {
 		return client.getDB(DB_NAME);
 	}
 
-	protected DBCollection getCollection() {
-		Context.getCurrentLogger().finer("Get a collection to use");
-		DBCollection collection = getDB().getCollection(COLLECTION_NAME);
-		Context.getCurrentLogger().finer("Got a collection to use");
+	protected DBCollection getCollection(String name) {
+		Context.getCurrentLogger().finer("Get a collection: " + name);
+		DBCollection collection = getDB().getCollection(name);
+		Context.getCurrentLogger().finer("Get a collection: " + name);
 		return collection;
 	}
 

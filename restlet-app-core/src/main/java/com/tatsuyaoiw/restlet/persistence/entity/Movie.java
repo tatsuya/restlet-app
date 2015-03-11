@@ -4,9 +4,7 @@ public class Movie {
 
 	// Technical identifier
 	private String id;
-
 	private String title;
-
 	private String url;
 
 	public String getId() {
@@ -32,4 +30,5 @@ public class Movie {
 	public void setUrl(String url) {
 		this.url = url;
 	}
+
 }
