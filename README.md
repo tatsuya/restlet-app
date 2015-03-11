@@ -7,7 +7,7 @@ A sample RESTful API using Restlet, learned from [restlet/restlet-tutorial](http
 - Maven installed on your machine: [Maven documentation link](http://maven.apache.org/)
 - Git installed on your machine
 
-This example uses [Restlet Framework 2.3.1][restlet] (Java SE edition) and [MongoDB][mongodb].
+This example uses [Restlet Framework 2.3.1][restlet] (Java SE edition) and [MongoDB][mongodb] as persistent storage (optional).
 
 ## Installation
 
@@ -22,21 +22,26 @@ For further instruction about running a Maven project : [Building a project with
 
 ### Run this application
 
-The main class is: `App.java`
-
-By default the application is launched at `http://localhost:9000`, but you can change it in `App.java`.
+The main class is: `App.java`. By default the application is launched at `http://localhost:9000`, but you can change it in `App.java`.
 
 You can interact with this application easily using a REST client like [POSTMAN][postman].
 
-## Database access
+## Database
 
-To interact with the database you can use `mongo` shell for MongoDB.
+The persistent layer can be switched between MongoDB and on-memory storage. You can set which storage is used by updating `AppConfig.java`. By default on-memory persistence is used. It means whenever you restart the application all data is just disappeared.
+
+## Description
+
+This Web API contains 2 main resources:
+
+- Trick: Represents a snowboard trick (name, description, etc.), identified by an auto-generated id.
+- Movie: Represents a movie of snowboard trick, identified by an auto-generated id.
 
 ## Usage
 
 These examples are made using the JSON format but you can use XML or YAML if you want.
 
-### Create a resource
+### Create a trick
 
 `POST http://localhost:9000/tricks/`
 
@@ -49,11 +54,9 @@ These examples are made using the JSON format but you can use XML or YAML if you
 
 The returned status is : `201 Created`. Note that the location of the created resource is written in the `Location` HTTP header.
 
-### Retrieve all resources
+### Retrieve all created tricks
 
-```
-http://localhost:9000/tricks
-```
+`GET http://localhost:9000/v1/tricks/`
 
 The trailing slash is optional : both `http://localhost:9000/tricks/` and `http://localhost:9000/tricks` will work. It should retrieve:
 
@@ -67,11 +70,9 @@ The trailing slash is optional : both `http://localhost:9000/tricks/` and `http:
 ]
 ```
 
-### Retrieve a resource by id
+### Retrieve a trick by id
 
-```
-http://localhost:9000/tricks/01234567-89ab-cdef-0123-456789abcdef
-```
+`GET http://localhost:9000/tricks/01234567-89ab-cdef-0123-456789abcdef`
 
 It should retrieve:
 
