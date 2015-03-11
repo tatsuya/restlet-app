@@ -21,7 +21,7 @@ public class MemoryMoviePersistenceTest {
 
 	@Test
 	public void testAdd() throws Exception {
-		MemoryMoviePersistence persistence = MemoryMoviePersistence.getMoviePersistence();
+		MemoryMoviePersistence persistence = MemoryMoviePersistence.getInstance();
 
 		List<Movie> movies = persistence.findAll();
 		Assert.assertEquals(0, movies.size());
@@ -47,7 +47,7 @@ public class MemoryMoviePersistenceTest {
 
 	@Test
 	public void testRemove() throws Exception {
-		MemoryMoviePersistence persistence = MemoryMoviePersistence.getMoviePersistence();
+		MemoryMoviePersistence persistence = MemoryMoviePersistence.getInstance();
 
 		Movie toAdd = new Movie();
 		toAdd.setTitle(TITLE_1);
@@ -70,7 +70,7 @@ public class MemoryMoviePersistenceTest {
 
 	@Test
 	public void testFindById() throws Exception {
-		MemoryMoviePersistence persistence = MemoryMoviePersistence.getMoviePersistence();
+		MemoryMoviePersistence persistence = MemoryMoviePersistence.getInstance();
 
 		Movie toAdd = new Movie();
 		toAdd.setTitle(TITLE_1);
@@ -89,7 +89,7 @@ public class MemoryMoviePersistenceTest {
 
 	@Test
 	public void testUpdate() throws Exception {
-		MemoryMoviePersistence persistence = MemoryMoviePersistence.getMoviePersistence();
+		MemoryMoviePersistence persistence = MemoryMoviePersistence.getInstance();
 
 		Movie toAdd = new Movie();
 		toAdd.setTitle(TITLE_1);

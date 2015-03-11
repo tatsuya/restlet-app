@@ -10,14 +10,13 @@ import java.util.UUID;
 
 public class MemoryTrickPersistence extends MemoryPersistenceService implements Persistence<Trick> {
 
-	// Singleton pattern
-	private static MemoryTrickPersistence trickPersistence = new MemoryTrickPersistence();
-
-	public static synchronized MemoryTrickPersistence getTrickPersistence() {
-		return trickPersistence;
-	}
+	private static final MemoryTrickPersistence INSTANCE = new MemoryTrickPersistence();
 
 	private MemoryTrickPersistence() {}
+
+	public static synchronized MemoryTrickPersistence getINSTANCE() {
+		return INSTANCE;
+	}
 
 	@Override
 	public Trick add(Trick toAdd) {

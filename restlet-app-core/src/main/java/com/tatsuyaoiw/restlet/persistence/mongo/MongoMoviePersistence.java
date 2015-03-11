@@ -15,14 +15,13 @@ public class MongoMoviePersistence extends MongoPersistenceService implements Pe
 
 	private static final String COLLECTION_NAME = "movies";
 
-	// Singleton pattern
-	private static MongoMoviePersistence moviePersistence = new MongoMoviePersistence();
-
-	public static synchronized MongoMoviePersistence getMoviePersistence() {
-		return moviePersistence;
-	}
+	private static final MongoMoviePersistence INSTANCE = new MongoMoviePersistence();
 
 	private MongoMoviePersistence() {}
+
+	public static MongoMoviePersistence getInstance() {
+		return INSTANCE;
+	}
 
 	@Override
 	public Movie add(Movie movie) {

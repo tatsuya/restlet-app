@@ -9,14 +9,14 @@ import java.util.List;
 import java.util.UUID;
 
 public class MemoryMoviePersistence extends MemoryPersistenceService implements Persistence<Movie> {
-	// Singleton pattern
-	private static MemoryMoviePersistence moviePersistence = new MemoryMoviePersistence();
 
-	public static MemoryMoviePersistence getMoviePersistence() {
-		return moviePersistence;
-	}
+	private static final MemoryMoviePersistence INSTANCE = new MemoryMoviePersistence();
 
 	private MemoryMoviePersistence() {}
+
+	public static MemoryMoviePersistence getInstance() {
+		return INSTANCE;
+	}
 
 	@Override
 	public Movie add(Movie toAdd) {

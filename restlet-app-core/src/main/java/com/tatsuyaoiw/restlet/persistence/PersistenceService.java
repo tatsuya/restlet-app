@@ -42,9 +42,9 @@ public abstract class PersistenceService {
 		checkStorage();
 
 		if (STORAGE.equals(Storage.MONGO)) {
-			return MongoTrickPersistence.getTrickPersistence();
+			return MongoTrickPersistence.getInstance();
 		} else if (STORAGE.equals(Storage.MEMORY)) {
-			return MemoryTrickPersistence.getTrickPersistence();
+			return MemoryTrickPersistence.getINSTANCE();
 		} else {
 			throw new IllegalStateException("Unsupported storage");
 		}
@@ -56,9 +56,9 @@ public abstract class PersistenceService {
 		checkStorage();
 
 		if (STORAGE.equals(Storage.MONGO)) {
-			return MongoMoviePersistence.getMoviePersistence();
+			return MongoMoviePersistence.getInstance();
 		} else if (STORAGE.equals(Storage.MEMORY)) {
-			return MemoryMoviePersistence.getMoviePersistence();
+			return MemoryMoviePersistence.getInstance();
 		} else {
 			throw new IllegalStateException("Unsupported storage");
 		}

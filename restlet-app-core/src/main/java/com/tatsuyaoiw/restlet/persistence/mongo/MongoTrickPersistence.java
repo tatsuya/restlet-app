@@ -15,14 +15,13 @@ public class MongoTrickPersistence extends MongoPersistenceService implements Pe
 
 	private static final String COLLECTION_NAME = "tricks";
 
-	// Singleton pattern
-	private static MongoTrickPersistence trickPersistence = new MongoTrickPersistence();
-
-	public static synchronized MongoTrickPersistence getTrickPersistence() {
-		return trickPersistence;
-	}
+	private static final MongoTrickPersistence INSTANCE = new MongoTrickPersistence();
 
 	private MongoTrickPersistence() {}
+
+	public static MongoTrickPersistence getInstance() {
+		return INSTANCE;
+	}
 
 	@Override
 	public Trick add(Trick trick) {

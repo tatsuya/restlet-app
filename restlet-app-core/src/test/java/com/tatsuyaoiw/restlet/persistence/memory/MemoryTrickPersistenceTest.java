@@ -21,7 +21,7 @@ public class MemoryTrickPersistenceTest {
 
 	@Test
 	public void testAdd() throws Exception {
-		MemoryTrickPersistence persistence = MemoryTrickPersistence.getTrickPersistence();
+		MemoryTrickPersistence persistence = MemoryTrickPersistence.getINSTANCE();
 
 		List<Trick> tricks = persistence.findAll();
 		Assert.assertEquals(0, tricks.size());
@@ -47,7 +47,7 @@ public class MemoryTrickPersistenceTest {
 
 	@Test
 	public void testRemove() throws Exception {
-		MemoryTrickPersistence persistence = MemoryTrickPersistence.getTrickPersistence();
+		MemoryTrickPersistence persistence = MemoryTrickPersistence.getINSTANCE();
 
 		Trick toAdd = new Trick();
 		toAdd.setName(NAME_1);
@@ -70,7 +70,7 @@ public class MemoryTrickPersistenceTest {
 
 	@Test
 	public void testFindById() throws Exception {
-		MemoryTrickPersistence persistence = MemoryTrickPersistence.getTrickPersistence();
+		MemoryTrickPersistence persistence = MemoryTrickPersistence.getINSTANCE();
 
 		Trick toAdd = new Trick();
 		toAdd.setName(NAME_1);
@@ -89,7 +89,7 @@ public class MemoryTrickPersistenceTest {
 
 	@Test
 	public void testUpdate() throws Exception {
-		MemoryTrickPersistence persistence = MemoryTrickPersistence.getTrickPersistence();
+		MemoryTrickPersistence persistence = MemoryTrickPersistence.getINSTANCE();
 
 		Trick toAdd = new Trick();
 		toAdd.setName(NAME_1);
