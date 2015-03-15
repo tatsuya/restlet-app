@@ -11,6 +11,7 @@ import org.restlet.Component;
 import org.restlet.Restlet;
 import org.restlet.data.Protocol;
 import org.restlet.engine.Engine;
+import org.restlet.resource.Directory;
 import org.restlet.routing.Router;
 
 import java.util.logging.Level;
@@ -43,8 +44,13 @@ public class App extends Application {
 		// Add a HTTP server connector to it
 		component.getServers().add(Protocol.HTTP, port);
 
+		// Add CLAP (ClassLoader Access Protocol) to access to representations via classloaders
+		component.getClients().add(Protocol.CLAP);
+
 		// Then attach it to the local host
 		component.getDefaultHost().attach(new App());
+
+		LOGGER.info("Application is now available on http://localhost:" + port + "/web/index.html");
 
 		return component;
 	}
@@ -55,12 +61,15 @@ public class App extends Application {
 	}
 
 	private Router createApiRouter() {
+		Directory directory = new Directory(getContext(), "clap://class/static/");
+		directory.setDeeplyAccessible(true);
+
+		Router router = new Router(getContext());
+		router.attach("/web", directory);
+
 		// Attach server resources to the given URL template.
 		// For instance, TrickListServerResource is attached
-		// to http://localhost:9000/tricks
-		// and to http://localhost:9000/tricks/
-		Router router = new Router(getContext());
-
+		// to http://localhost:9000/trick and to http://localhost:9000/tricks/
 		router.attach("/tricks", TrickListServerResource.class);
 		router.attach("/tricks/", TrickListServerResource.class);
 		router.attach("/tricks/{id}", TrickServerResource.class);
