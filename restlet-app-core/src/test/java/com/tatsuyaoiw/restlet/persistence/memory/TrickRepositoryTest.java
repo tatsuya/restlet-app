@@ -1,6 +1,7 @@
 package com.tatsuyaoiw.restlet.persistence.memory;
 
-import com.tatsuyaoiw.restlet.persistence.InMemoryStrategy;
+import com.tatsuyaoiw.restlet.persistence.strategy.InMemoryStrategy;
+import com.tatsuyaoiw.restlet.persistence.repository.TrickRepository;
 import com.tatsuyaoiw.restlet.persistence.entity.Trick;
 import org.junit.Assert;
 import org.junit.Before;
@@ -8,7 +9,7 @@ import org.junit.Test;
 
 import java.util.List;
 
-public class MemoryTrickRepositoryTest {
+public class TrickRepositoryTest {
 
 	private final static String NAME_1 = "Ollie";
 	private final static String DESC_1 = "A trick in which the snowboarder springs off the tail of the board and into the air.";
@@ -17,12 +18,12 @@ public class MemoryTrickRepositoryTest {
 
 	@Before
 	public void before() throws Exception {
-		MemoryTrickRepository.init(new InMemoryStrategy<Trick>());
+		TrickRepository.init(new InMemoryStrategy<Trick>());
 	}
 
 	@Test
 	public void testAdd() throws Exception {
-		MemoryTrickRepository repository = MemoryTrickRepository.getINSTANCE();
+		TrickRepository repository = TrickRepository.getInstance();
 
 		List<Trick> tricks = repository.findAll();
 		Assert.assertEquals(0, tricks.size());
@@ -48,7 +49,7 @@ public class MemoryTrickRepositoryTest {
 
 	@Test
 	public void testRemove() throws Exception {
-		MemoryTrickRepository repository = MemoryTrickRepository.getINSTANCE();
+		TrickRepository repository = TrickRepository.getInstance();
 
 		Trick toAdd = new Trick();
 		toAdd.setName(NAME_1);
@@ -71,7 +72,7 @@ public class MemoryTrickRepositoryTest {
 
 	@Test
 	public void testFindById() throws Exception {
-		MemoryTrickRepository repository = MemoryTrickRepository.getINSTANCE();
+		TrickRepository repository = TrickRepository.getInstance();
 
 		Trick toAdd = new Trick();
 		toAdd.setName(NAME_1);
@@ -90,7 +91,7 @@ public class MemoryTrickRepositoryTest {
 
 	@Test
 	public void testUpdate() throws Exception {
-		MemoryTrickRepository repository = MemoryTrickRepository.getINSTANCE();
+		TrickRepository repository = TrickRepository.getInstance();
 
 		Trick toAdd = new Trick();
 		toAdd.setName(NAME_1);

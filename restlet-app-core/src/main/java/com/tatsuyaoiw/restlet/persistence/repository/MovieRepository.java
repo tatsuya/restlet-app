@@ -1,26 +1,25 @@
-package com.tatsuyaoiw.restlet.persistence.memory;
+package com.tatsuyaoiw.restlet.persistence.repository;
 
-import com.tatsuyaoiw.restlet.persistence.Repository;
-import com.tatsuyaoiw.restlet.persistence.RepositoryStrategy;
 import com.tatsuyaoiw.restlet.persistence.entity.Movie;
+import com.tatsuyaoiw.restlet.persistence.strategy.RepositoryStrategy;
 import org.restlet.Context;
 
 import java.util.List;
 
-public class MemoryMovieRepository implements Repository<Movie> {
+public class MovieRepository implements Repository<Movie> {
 
 	private static RepositoryStrategy<Movie> strategy;
 
-	private static final MemoryMovieRepository INSTANCE = new MemoryMovieRepository();
+	private static final MovieRepository INSTANCE = new MovieRepository();
 
-	private MemoryMovieRepository() {}
+	private MovieRepository() {}
 
-	public static MemoryMovieRepository getInstance() {
+	public static MovieRepository getInstance() {
 		return INSTANCE;
 	}
 
 	public static void init(RepositoryStrategy<Movie> strategy) {
-		MemoryMovieRepository.strategy = strategy;
+		MovieRepository.strategy = strategy;
 	}
 
 	@Override

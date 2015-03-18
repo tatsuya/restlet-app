@@ -1,4 +1,4 @@
-package com.tatsuyaoiw.restlet.persistence;
+package com.tatsuyaoiw.restlet.persistence.strategy;
 
 import com.tatsuyaoiw.restlet.persistence.entity.Entity;
 

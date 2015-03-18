@@ -1,5 +1,8 @@
 package com.tatsuyaoiw.restlet.persistence.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public abstract class Entity {
 
 	private String id;

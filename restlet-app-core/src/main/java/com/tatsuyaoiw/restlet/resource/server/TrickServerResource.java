@@ -1,7 +1,7 @@
 package com.tatsuyaoiw.restlet.resource.server;
 
-import com.tatsuyaoiw.restlet.persistence.Repository;
-import com.tatsuyaoiw.restlet.persistence.PersistenceService;
+import com.tatsuyaoiw.restlet.persistence.RepositoryManager;
+import com.tatsuyaoiw.restlet.persistence.repository.Repository;
 import com.tatsuyaoiw.restlet.persistence.entity.Trick;
 import com.tatsuyaoiw.restlet.representation.TrickRepresentation;
 import com.tatsuyaoiw.restlet.resource.TrickResource;
@@ -32,7 +32,7 @@ public class TrickServerResource extends ServerResource implements TrickResource
 		getLogger().finer("Initialization of TrickServerResource with trick id: " + id);
 
 		// Initialize the persistence layer
-		repository = PersistenceService.getTrickRepository();
+		repository = RepositoryManager.getTrickRepository();
 
 		trick = repository.findById(id);
 

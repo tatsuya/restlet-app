@@ -1,8 +1,8 @@
 package com.tatsuyaoiw.restlet.resource.server;
 
 import com.tatsuyaoiw.restlet.core.util.ResourceUtils;
-import com.tatsuyaoiw.restlet.persistence.Repository;
-import com.tatsuyaoiw.restlet.persistence.PersistenceService;
+import com.tatsuyaoiw.restlet.persistence.RepositoryManager;
+import com.tatsuyaoiw.restlet.persistence.repository.Repository;
 import com.tatsuyaoiw.restlet.persistence.entity.Movie;
 import com.tatsuyaoiw.restlet.representation.MovieRepresentation;
 import com.tatsuyaoiw.restlet.resource.MovieListResource;
@@ -22,7 +22,7 @@ public class MovieListServerResource extends ServerResource implements MovieList
 	protected void doInit() throws ResourceException {
 		getLogger().finer("Initialization of MovieListServerResource.");
 
-		repository = PersistenceService.getMovieRepository();
+		repository = RepositoryManager.getMovieRepository();
 
 		getLogger().finer("Initialization of TrickListServerResource ended.");
 	}

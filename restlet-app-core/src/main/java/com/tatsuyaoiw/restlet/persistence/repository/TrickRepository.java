@@ -1,26 +1,25 @@
-package com.tatsuyaoiw.restlet.persistence.memory;
+package com.tatsuyaoiw.restlet.persistence.repository;
 
-import com.tatsuyaoiw.restlet.persistence.Repository;
-import com.tatsuyaoiw.restlet.persistence.RepositoryStrategy;
 import com.tatsuyaoiw.restlet.persistence.entity.Trick;
+import com.tatsuyaoiw.restlet.persistence.strategy.RepositoryStrategy;
 import org.restlet.Context;
 
 import java.util.List;
 
-public class MemoryTrickRepository implements Repository<Trick> {
+public class TrickRepository implements Repository<Trick> {
 
 	private static RepositoryStrategy<Trick> strategy;
 
-	private static final MemoryTrickRepository INSTANCE = new MemoryTrickRepository();
+	private static final TrickRepository INSTANCE = new TrickRepository();
 
-	private MemoryTrickRepository() {}
+	private TrickRepository() {}
 
-	public static synchronized MemoryTrickRepository getINSTANCE() {
+	public static synchronized TrickRepository getInstance() {
 		return INSTANCE;
 	}
 
 	public static void init(RepositoryStrategy<Trick> strategy) {
-		MemoryTrickRepository.strategy = strategy;
+		TrickRepository.strategy = strategy;
 	}
 
 	@Override

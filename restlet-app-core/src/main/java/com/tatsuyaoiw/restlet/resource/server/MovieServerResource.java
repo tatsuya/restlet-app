@@ -1,7 +1,7 @@
 package com.tatsuyaoiw.restlet.resource.server;
 
-import com.tatsuyaoiw.restlet.persistence.Repository;
-import com.tatsuyaoiw.restlet.persistence.PersistenceService;
+import com.tatsuyaoiw.restlet.persistence.RepositoryManager;
+import com.tatsuyaoiw.restlet.persistence.repository.Repository;
 import com.tatsuyaoiw.restlet.persistence.entity.Movie;
 import com.tatsuyaoiw.restlet.representation.MovieRepresentation;
 import com.tatsuyaoiw.restlet.resource.MovieResource;
@@ -23,7 +23,7 @@ public class MovieServerResource extends ServerResource implements MovieResource
 
 		getLogger().finer("Initialization of " + getClass().getSimpleName() + " with movie id: " + id);
 
-		repository = PersistenceService.getMovieRepository();
+		repository = RepositoryManager.getMovieRepository();
 
 		movie = repository.findById(id);
 

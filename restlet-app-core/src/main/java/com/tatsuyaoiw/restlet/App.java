@@ -1,7 +1,7 @@
 package com.tatsuyaoiw.restlet;
 
 
-import com.tatsuyaoiw.restlet.persistence.PersistenceService;
+import com.tatsuyaoiw.restlet.persistence.RepositoryManager;
 import com.tatsuyaoiw.restlet.resource.server.MovieListServerResource;
 import com.tatsuyaoiw.restlet.resource.server.MovieServerResource;
 import com.tatsuyaoiw.restlet.resource.server.TrickListServerResource;
@@ -31,7 +31,7 @@ public class App extends Application {
 		Engine.setLogLevel(Level.FINER);
 		LOGGER.info("Starting application...");
 
-		PersistenceService.initialize(AppConfig.STORAGE);
+		RepositoryManager.initialize(AppConfig.STORAGE);
 
 		// Create a new Restlet component
 		Component component = new Component();

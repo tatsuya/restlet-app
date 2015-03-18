@@ -1,6 +1,7 @@
 package com.tatsuyaoiw.restlet.persistence.memory;
 
-import com.tatsuyaoiw.restlet.persistence.InMemoryStrategy;
+import com.tatsuyaoiw.restlet.persistence.strategy.InMemoryStrategy;
+import com.tatsuyaoiw.restlet.persistence.repository.MovieRepository;
 import com.tatsuyaoiw.restlet.persistence.entity.Movie;
 import org.junit.Assert;
 import org.junit.Before;
@@ -8,7 +9,7 @@ import org.junit.Test;
 
 import java.util.List;
 
-public class MemoryMovieRepositoryTest {
+public class MovieRepositoryTest {
 
 	private final static String TITLE_1 = "How to Ollie on a Snowboard";
 	private final static String URL_1 = "www.youtube.com/watch?v=9f9_ILcZjCk";
@@ -17,12 +18,12 @@ public class MemoryMovieRepositoryTest {
 
 	@Before
 	public void before() throws Exception {
-		MemoryMovieRepository.init(new InMemoryStrategy<Movie>());
+		MovieRepository.init(new InMemoryStrategy<Movie>());
 	}
 
 	@Test
 	public void testAdd() throws Exception {
-		MemoryMovieRepository repository = MemoryMovieRepository.getInstance();
+		MovieRepository repository = MovieRepository.getInstance();
 
 		List<Movie> movies = repository.findAll();
 		Assert.assertEquals(0, movies.size());
@@ -48,7 +49,7 @@ public class MemoryMovieRepositoryTest {
 
 	@Test
 	public void testRemove() throws Exception {
-		MemoryMovieRepository repository = MemoryMovieRepository.getInstance();
+		MovieRepository repository = MovieRepository.getInstance();
 
 		Movie toAdd = new Movie();
 		toAdd.setTitle(TITLE_1);
@@ -71,7 +72,7 @@ public class MemoryMovieRepositoryTest {
 
 	@Test
 	public void testFindById() throws Exception {
-		MemoryMovieRepository repository = MemoryMovieRepository.getInstance();
+		MovieRepository repository = MovieRepository.getInstance();
 
 		Movie toAdd = new Movie();
 		toAdd.setTitle(TITLE_1);
@@ -90,7 +91,7 @@ public class MemoryMovieRepositoryTest {
 
 	@Test
 	public void testUpdate() throws Exception {
-		MemoryMovieRepository repository = MemoryMovieRepository.getInstance();
+		MovieRepository repository = MovieRepository.getInstance();
 
 		Movie toAdd = new Movie();
 		toAdd.setTitle(TITLE_1);
