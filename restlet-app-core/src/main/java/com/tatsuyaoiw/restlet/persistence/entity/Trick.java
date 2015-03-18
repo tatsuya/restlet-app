@@ -3,22 +3,10 @@ package com.tatsuyaoiw.restlet.persistence.entity;
 /**
  * Represents a trick.
  */
-public class Trick {
-
-	// Technical identifier
-	private String id;
+public class Trick extends Entity {
 
 	private String name;
-
 	private String description;
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
 
 	public String getName() {
 		return name;
@@ -35,4 +23,5 @@ public class Trick {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+
 }
