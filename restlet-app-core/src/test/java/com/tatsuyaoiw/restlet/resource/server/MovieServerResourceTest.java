@@ -23,22 +23,22 @@ public class MovieServerResourceTest {
 	private final static String TITLE_2 = "How to Ollie Higher on a Snowboard";
 	private final static String URL_2 = "www.youtube.com/watch?v=7B4-Lwlo3xM";
 
-	private Repository<Movie> persistence;
+	private Repository<Movie> repository;
 	private String id;
 
 	@Before
 	public void before() throws Exception {
 		PersistenceService.initialize(Storage.MEMORY);
 
-		persistence = PersistenceService.getMovieRepository();
+		repository = PersistenceService.getMovieRepository();
 
 		Movie toAdd = new Movie();
 		toAdd.setTitle(TITLE_1);
 		toAdd.setUrl(URL_1);
 
-		Movie added = persistence.add(toAdd);
+		Movie added = repository.add(toAdd);
 
-		List<Movie> movies = persistence.findAll();
+		List<Movie> movies = repository.findAll();
 		Assert.assertEquals(1, movies.size());
 
 		Movie trick = movies.get(0);
@@ -77,7 +77,7 @@ public class MovieServerResourceTest {
 
 		spy.remove();
 
-		List<Movie> movies = persistence.findAll();
+		List<Movie> movies = repository.findAll();
 		Assert.assertEquals(0, movies.size());
 	}
 
@@ -93,7 +93,7 @@ public class MovieServerResourceTest {
 
 		spy.update(toUpdate);
 
-		List<Movie> movies = persistence.findAll();
+		List<Movie> movies = repository.findAll();
 		Assert.assertEquals(1, movies.size());
 
 		Movie movie = movies.get(0);

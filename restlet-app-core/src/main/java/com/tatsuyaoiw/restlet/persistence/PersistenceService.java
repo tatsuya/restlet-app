@@ -23,8 +23,8 @@ public abstract class PersistenceService {
 			MongoTrickRepository.initialize();
 			MongoMovieRepository.initialize();
 		} else if (STORAGE.equals(Storage.MEMORY)) {
-			MemoryTrickRepository.initialize();
-			MemoryMovieRepository.initialize();
+			MemoryTrickRepository.init(new InMemoryStrategy<Trick>());
+			MemoryMovieRepository.init(new InMemoryStrategy<Movie>());
 		} else {
 			throw new IllegalArgumentException("Unsupported storage");
 		}

@@ -1,5 +1,6 @@
 package com.tatsuyaoiw.restlet.persistence.memory;
 
+import com.tatsuyaoiw.restlet.persistence.InMemoryStrategy;
 import com.tatsuyaoiw.restlet.persistence.entity.Movie;
 import org.junit.Assert;
 import org.junit.Before;
@@ -16,7 +17,7 @@ public class MemoryMovieRepositoryTest {
 
 	@Before
 	public void before() throws Exception {
-		MemoryMovieRepository.initialize();
+		MemoryMovieRepository.init(new InMemoryStrategy<Movie>());
 	}
 
 	@Test

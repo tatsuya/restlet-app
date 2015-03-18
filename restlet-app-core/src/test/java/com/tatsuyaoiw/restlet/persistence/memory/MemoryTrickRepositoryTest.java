@@ -1,5 +1,6 @@
 package com.tatsuyaoiw.restlet.persistence.memory;
 
+import com.tatsuyaoiw.restlet.persistence.InMemoryStrategy;
 import com.tatsuyaoiw.restlet.persistence.entity.Trick;
 import org.junit.Assert;
 import org.junit.Before;
@@ -16,7 +17,7 @@ public class MemoryTrickRepositoryTest {
 
 	@Before
 	public void before() throws Exception {
-		MemoryTrickRepository.initialize();
+		MemoryTrickRepository.init(new InMemoryStrategy<Trick>());
 	}
 
 	@Test
