@@ -1,7 +1,7 @@
 package com.tatsuyaoiw.restlet.resource.server;
 
 import com.tatsuyaoiw.restlet.core.util.ResourceUtils;
-import com.tatsuyaoiw.restlet.persistence.Persistence;
+import com.tatsuyaoiw.restlet.persistence.Repository;
 import com.tatsuyaoiw.restlet.persistence.PersistenceService;
 import com.tatsuyaoiw.restlet.persistence.entity.Movie;
 import com.tatsuyaoiw.restlet.representation.MovieRepresentation;
@@ -16,7 +16,7 @@ import java.util.List;
 
 public class MovieListServerResource extends ServerResource implements MovieListResource {
 
-	private Persistence<Movie> moviePersistence;
+	private Repository<Movie> moviePersistence;
 
 	@Override
 	protected void doInit() throws ResourceException {

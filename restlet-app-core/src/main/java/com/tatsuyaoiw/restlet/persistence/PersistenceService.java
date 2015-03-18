@@ -36,7 +36,7 @@ public abstract class PersistenceService {
 		}
 	}
 
-	public static Persistence<Trick> getTrickPersistence() {
+	public static Repository<Trick> getTrickPersistence() {
 		Context.getCurrentLogger().finer("Get the persistence layer for Tricks.");
 
 		checkStorage();
@@ -50,7 +50,7 @@ public abstract class PersistenceService {
 		}
 	}
 
-	public static Persistence<Movie> getMoviePersistence() {
+	public static Repository<Movie> getMoviePersistence() {
 		Context.getCurrentLogger().finer("Get the persistence layer for Tricks.");
 
 		checkStorage();

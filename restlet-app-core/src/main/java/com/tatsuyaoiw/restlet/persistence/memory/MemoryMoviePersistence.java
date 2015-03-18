@@ -1,6 +1,6 @@
 package com.tatsuyaoiw.restlet.persistence.memory;
 
-import com.tatsuyaoiw.restlet.persistence.Persistence;
+import com.tatsuyaoiw.restlet.persistence.Repository;
 import com.tatsuyaoiw.restlet.persistence.entity.Movie;
 import org.restlet.Context;
 
@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class MemoryMoviePersistence extends MemoryPersistenceService implements Persistence<Movie> {
+public class MemoryMoviePersistence extends MemoryPersistenceService implements Repository<Movie> {
 
 	private static final MemoryMoviePersistence INSTANCE = new MemoryMoviePersistence();
 
@@ -67,7 +67,7 @@ public class MemoryMoviePersistence extends MemoryPersistenceService implements 
 	@Override
 	public Movie update(String id, Movie toUpdate) {
 		Context.getCurrentLogger().finer("Method update() of " + getClass().getSimpleName() + " called");
-		
+
 		toUpdate.setId(id);
 		getMovies().put(id, toUpdate);
 

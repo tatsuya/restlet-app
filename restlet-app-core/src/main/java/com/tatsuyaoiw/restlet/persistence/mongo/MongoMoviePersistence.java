@@ -3,7 +3,7 @@ package com.tatsuyaoiw.restlet.persistence.mongo;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBCursor;
 import com.mongodb.WriteResult;
-import com.tatsuyaoiw.restlet.persistence.Persistence;
+import com.tatsuyaoiw.restlet.persistence.Repository;
 import com.tatsuyaoiw.restlet.persistence.entity.Movie;
 import org.bson.types.ObjectId;
 import org.restlet.Context;
@@ -11,7 +11,7 @@ import org.restlet.Context;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MongoMoviePersistence extends MongoPersistenceService implements Persistence<Movie> {
+public class MongoMoviePersistence extends MongoPersistenceService implements Repository<Movie> {
 
 	private static final String COLLECTION_NAME = "movies";
 

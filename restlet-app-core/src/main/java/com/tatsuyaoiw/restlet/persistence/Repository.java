@@ -1,15 +1,17 @@
 package com.tatsuyaoiw.restlet.persistence;
 
+import com.tatsuyaoiw.restlet.persistence.entity.Entity;
+
 import java.util.List;
 
-public interface Persistence<T> {
+public interface Repository<T extends Entity> {
 	/**
 	 * Adds a new entity to the database.
 	 *
-	 * @param toAdd The entity to add.
+	 * @param entity The entity to add.
 	 * @return The newly added entity, especially with its technical identifier, in case it is computed.
 	 */
-	T add(T toAdd);
+	T add(T entity);
 
 	/**
 	 * Remove an entity from the database
@@ -38,8 +40,8 @@ public interface Persistence<T> {
 	 * Update an existing entity.
 	 *
 	 * @param id The identifier of the entity to update.
-	 * @param toUpdate The new state of the entity
+	 * @param entity The new state of the entity
 	 * @return The updated entity.
 	 */
-	T update(String id, T toUpdate);
+	T update(String id, T entity);
 }

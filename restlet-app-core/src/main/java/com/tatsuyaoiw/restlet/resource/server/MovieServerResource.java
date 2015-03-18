@@ -1,6 +1,6 @@
 package com.tatsuyaoiw.restlet.resource.server;
 
-import com.tatsuyaoiw.restlet.persistence.Persistence;
+import com.tatsuyaoiw.restlet.persistence.Repository;
 import com.tatsuyaoiw.restlet.persistence.PersistenceService;
 import com.tatsuyaoiw.restlet.persistence.entity.Movie;
 import com.tatsuyaoiw.restlet.representation.MovieRepresentation;
@@ -11,7 +11,7 @@ import org.restlet.resource.ServerResource;
 
 public class MovieServerResource extends ServerResource implements MovieResource {
 
-	private Persistence<Movie> persistence;
+	private Repository<Movie> persistence;
 
 	private Movie movie;
 

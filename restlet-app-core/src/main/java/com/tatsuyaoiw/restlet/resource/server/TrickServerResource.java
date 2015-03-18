@@ -1,6 +1,6 @@
 package com.tatsuyaoiw.restlet.resource.server;
 
-import com.tatsuyaoiw.restlet.persistence.Persistence;
+import com.tatsuyaoiw.restlet.persistence.Repository;
 import com.tatsuyaoiw.restlet.persistence.PersistenceService;
 import com.tatsuyaoiw.restlet.persistence.entity.Trick;
 import com.tatsuyaoiw.restlet.representation.TrickRepresentation;
@@ -18,7 +18,7 @@ import org.restlet.resource.ServerResource;
  */
 public class TrickServerResource extends ServerResource implements TrickResource {
 
-	private Persistence<Trick> trickPersistence;
+	private Repository<Trick> trickPersistence;
 
 	private Trick trick;
 

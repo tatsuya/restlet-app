@@ -1,6 +1,6 @@
 package com.tatsuyaoiw.restlet.resource.server;
 
-import com.tatsuyaoiw.restlet.persistence.Persistence;
+import com.tatsuyaoiw.restlet.persistence.Repository;
 import com.tatsuyaoiw.restlet.persistence.PersistenceService;
 import com.tatsuyaoiw.restlet.persistence.Storage;
 import com.tatsuyaoiw.restlet.persistence.entity.Movie;
@@ -23,7 +23,7 @@ public class MovieServerResourceTest {
 	private final static String TITLE_2 = "How to Ollie Higher on a Snowboard";
 	private final static String URL_2 = "www.youtube.com/watch?v=7B4-Lwlo3xM";
 
-	private Persistence<Movie> persistence;
+	private Repository<Movie> persistence;
 	private String id;
 
 	@Before

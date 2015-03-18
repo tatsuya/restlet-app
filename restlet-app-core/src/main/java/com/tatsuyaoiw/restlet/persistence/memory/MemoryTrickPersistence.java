@@ -1,6 +1,6 @@
 package com.tatsuyaoiw.restlet.persistence.memory;
 
-import com.tatsuyaoiw.restlet.persistence.Persistence;
+import com.tatsuyaoiw.restlet.persistence.Repository;
 import com.tatsuyaoiw.restlet.persistence.entity.Trick;
 import org.restlet.Context;
 
@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class MemoryTrickPersistence extends MemoryPersistenceService implements Persistence<Trick> {
+public class MemoryTrickPersistence extends MemoryPersistenceService implements Repository<Trick> {
 
 	private static final MemoryTrickPersistence INSTANCE = new MemoryTrickPersistence();
 

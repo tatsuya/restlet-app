@@ -1,6 +1,6 @@
 package com.tatsuyaoiw.restlet.resource.server;
 
-import com.tatsuyaoiw.restlet.persistence.Persistence;
+import com.tatsuyaoiw.restlet.persistence.Repository;
 import com.tatsuyaoiw.restlet.persistence.PersistenceService;
 import com.tatsuyaoiw.restlet.persistence.Storage;
 import com.tatsuyaoiw.restlet.persistence.entity.Trick;
@@ -23,7 +23,7 @@ public class TrickServerResourceTest {
 	private final static String NAME_2 = "Nollie";
 	private final static String DESC_2 = "A trick in which the snowboarder springs off the nose of the board and into the air.";
 
-	private Persistence<Trick> persistence;
+	private Repository<Trick> persistence;
 	private String id;
 
 	@Before

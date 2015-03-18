@@ -1,7 +1,7 @@
 package com.tatsuyaoiw.restlet.resource.server;
 
 import com.tatsuyaoiw.restlet.core.util.ResourceUtils;
-import com.tatsuyaoiw.restlet.persistence.Persistence;
+import com.tatsuyaoiw.restlet.persistence.Repository;
 import com.tatsuyaoiw.restlet.persistence.PersistenceService;
 import com.tatsuyaoiw.restlet.persistence.entity.Trick;
 import com.tatsuyaoiw.restlet.representation.TrickRepresentation;
@@ -16,7 +16,7 @@ import java.util.List;
 
 public class TrickListServerResource extends ServerResource implements TrickListResource {
 
-	private Persistence<Trick> trickPersistence;
+	private Repository<Trick> trickPersistence;
 
 	/**
 	 * Method called at the creation of the Resources (ie : each time the resource is called).
