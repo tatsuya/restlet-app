@@ -30,7 +30,7 @@ public class TrickServerResourceTest {
 	public void before() {
 		PersistenceService.initialize(Storage.MEMORY);
 
-		persistence = PersistenceService.getTrickPersistence();
+		persistence = PersistenceService.getTrickRepository();
 
 		Trick toAdd = new Trick();
 		toAdd.setName(NAME_1);

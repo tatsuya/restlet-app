@@ -18,7 +18,7 @@ import org.restlet.resource.ServerResource;
  */
 public class TrickServerResource extends ServerResource implements TrickResource {
 
-	private Repository<Trick> trickPersistence;
+	private Repository<Trick> repository;
 
 	private Trick trick;
 
@@ -32,9 +32,9 @@ public class TrickServerResource extends ServerResource implements TrickResource
 		getLogger().finer("Initialization of TrickServerResource with trick id: " + id);
 
 		// Initialize the persistence layer
-		trickPersistence = PersistenceService.getTrickPersistence();
+		repository = PersistenceService.getTrickRepository();
 
-		trick = trickPersistence.findById(id);
+		trick = repository.findById(id);
 
 		// Check if retrieved trick is not null. If it is null it means that the given id is wrong.
 		setExisting(trick != null);
@@ -58,7 +58,7 @@ public class TrickServerResource extends ServerResource implements TrickResource
 		getLogger().finer("Removal of trick");
 
 		// Remove trick in DB
-		Boolean isRemoved = trickPersistence.remove(id);
+		Boolean isRemoved = repository.remove(id);
 
 		if (!isRemoved) {
 			getLogger().finer("Trick id does not exist");
@@ -78,7 +78,7 @@ public class TrickServerResource extends ServerResource implements TrickResource
 			throw new IllegalArgumentException("Trick with the following id does not exist: " + id);
 		}
 
-		Trick trickOut = trickPersistence.update(id, trickIn);
+		Trick trickOut = repository.update(id, trickIn);
 
 		getLogger().finer("Trick successfully updated");
 

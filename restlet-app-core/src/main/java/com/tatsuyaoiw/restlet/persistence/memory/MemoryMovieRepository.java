@@ -10,15 +10,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-public class MemoryMoviePersistence implements Repository<Movie> {
+public class MemoryMovieRepository implements Repository<Movie> {
 
 	private static Map<String, Movie> movies;
 
-	private static final MemoryMoviePersistence INSTANCE = new MemoryMoviePersistence();
+	private static final MemoryMovieRepository INSTANCE = new MemoryMovieRepository();
 
-	private MemoryMoviePersistence() {}
+	private MemoryMovieRepository() {}
 
-	public static MemoryMoviePersistence getInstance() {
+	public static MemoryMovieRepository getInstance() {
 		return INSTANCE;
 	}
 

@@ -30,7 +30,7 @@ public class MovieServerResourceTest {
 	public void before() throws Exception {
 		PersistenceService.initialize(Storage.MEMORY);
 
-		persistence = PersistenceService.getMoviePersistence();
+		persistence = PersistenceService.getMovieRepository();
 
 		Movie toAdd = new Movie();
 		toAdd.setTitle(TITLE_1);

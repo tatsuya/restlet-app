@@ -16,7 +16,7 @@ import java.util.List;
 
 public class TrickListServerResource extends ServerResource implements TrickListResource {
 
-	private Repository<Trick> trickPersistence;
+	private Repository<Trick> repository;
 
 	/**
 	 * Method called at the creation of the Resources (ie : each time the resource is called).
@@ -25,7 +25,7 @@ public class TrickListServerResource extends ServerResource implements TrickList
 	protected void doInit() throws ResourceException {
 		getLogger().finer("Initialization of TrickListServerResource.");
 
-		trickPersistence = PersistenceService.getTrickPersistence();
+		repository = PersistenceService.getTrickRepository();
 
 		getLogger().finer("Initialization of TrickListServerResource ended.");
 	}
@@ -34,7 +34,7 @@ public class TrickListServerResource extends ServerResource implements TrickList
 	public List<TrickRepresentation> getTricks() {
 		getLogger().finer("Retrieve the list of tricks");
 
-		List<Trick> tricks = trickPersistence.findAll();
+		List<Trick> tricks = repository.findAll();
 
 		List<TrickRepresentation> trickReprs = new ArrayList<TrickRepresentation>();
 		for (Trick trick : tricks) {
@@ -54,7 +54,7 @@ public class TrickListServerResource extends ServerResource implements TrickList
 		Trick trickIn = TrickUtils.toTrick(trickRepr);
 
 		// Add new trick in DB and retrieve created trick
-		Trick trickOut = trickPersistence.add(trickIn);
+		Trick trickOut = repository.add(trickIn);
 
 		TrickRepresentation result = TrickUtils.toTrickRepresentation(trickOut);
 

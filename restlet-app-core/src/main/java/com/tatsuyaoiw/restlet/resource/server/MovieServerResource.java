@@ -11,7 +11,7 @@ import org.restlet.resource.ServerResource;
 
 public class MovieServerResource extends ServerResource implements MovieResource {
 
-	private Repository<Movie> persistence;
+	private Repository<Movie> repository;
 
 	private Movie movie;
 
@@ -23,9 +23,9 @@ public class MovieServerResource extends ServerResource implements MovieResource
 
 		getLogger().finer("Initialization of " + getClass().getSimpleName() + " with movie id: " + id);
 
-		persistence = PersistenceService.getMoviePersistence();
+		repository = PersistenceService.getMovieRepository();
 
-		movie = persistence.findById(id);
+		movie = repository.findById(id);
 
 		setExisting(movie != null);
 
@@ -47,7 +47,7 @@ public class MovieServerResource extends ServerResource implements MovieResource
 	public void remove() {
 		getLogger().finer("Removal of movie");
 
-		Boolean isRemoved = persistence.remove(id);
+		Boolean isRemoved = repository.remove(id);
 
 		if (!isRemoved) {
 			getLogger().finer("Movie id does not exist");
@@ -67,7 +67,7 @@ public class MovieServerResource extends ServerResource implements MovieResource
 			throw new IllegalArgumentException("Movie with the following id does not exist: " + id);
 		}
 
-		Movie movieOut = persistence.update(id, movieIn);
+		Movie movieOut = repository.update(id, movieIn);
 
 		getLogger().finer("Movie successfully updated");
 

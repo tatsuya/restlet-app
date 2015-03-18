@@ -16,13 +16,13 @@ import java.util.List;
 
 public class MovieListServerResource extends ServerResource implements MovieListResource {
 
-	private Repository<Movie> moviePersistence;
+	private Repository<Movie> repository;
 
 	@Override
 	protected void doInit() throws ResourceException {
 		getLogger().finer("Initialization of MovieListServerResource.");
 
-		moviePersistence = PersistenceService.getMoviePersistence();
+		repository = PersistenceService.getMovieRepository();
 
 		getLogger().finer("Initialization of TrickListServerResource ended.");
 	}
@@ -31,7 +31,7 @@ public class MovieListServerResource extends ServerResource implements MovieList
 	public List<MovieRepresentation> getMovies() {
 		getLogger().finer("Retrieve the list of movies");
 
-		List<Movie> movies = moviePersistence.findAll();
+		List<Movie> movies = repository.findAll();
 
 		List<MovieRepresentation> movieReprs = new ArrayList<MovieRepresentation>();
 		for (Movie movie : movies) {
@@ -49,7 +49,7 @@ public class MovieListServerResource extends ServerResource implements MovieList
 
 		Movie toAdd = MovieUtils.toMovie(movieReprIn);
 
-		Movie added = moviePersistence.add(toAdd);
+		Movie added = repository.add(toAdd);
 
 		MovieRepresentation movieReprOut = MovieUtils.toMovieRepresentation(added);
 

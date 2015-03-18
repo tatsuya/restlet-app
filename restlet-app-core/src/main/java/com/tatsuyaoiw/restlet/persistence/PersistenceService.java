@@ -2,10 +2,10 @@ package com.tatsuyaoiw.restlet.persistence;
 
 import com.tatsuyaoiw.restlet.persistence.entity.Movie;
 import com.tatsuyaoiw.restlet.persistence.entity.Trick;
-import com.tatsuyaoiw.restlet.persistence.memory.MemoryMoviePersistence;
-import com.tatsuyaoiw.restlet.persistence.memory.MemoryTrickPersistence;
-import com.tatsuyaoiw.restlet.persistence.mongo.MongoMoviePersistence;
-import com.tatsuyaoiw.restlet.persistence.mongo.MongoTrickPersistence;
+import com.tatsuyaoiw.restlet.persistence.memory.MemoryMovieRepository;
+import com.tatsuyaoiw.restlet.persistence.memory.MemoryTrickRepository;
+import com.tatsuyaoiw.restlet.persistence.mongo.MongoMovieRepository;
+import com.tatsuyaoiw.restlet.persistence.mongo.MongoTrickRepository;
 import org.restlet.Context;
 
 public abstract class PersistenceService {
@@ -20,11 +20,11 @@ public abstract class PersistenceService {
 	public static void initialize(Storage storage) {
 		STORAGE = storage;
 		if (STORAGE.equals(Storage.MONGO)) {
-			MongoTrickPersistence.initialize();
-			MongoMoviePersistence.initialize();
+			MongoTrickRepository.initialize();
+			MongoMovieRepository.initialize();
 		} else if (STORAGE.equals(Storage.MEMORY)) {
-			MemoryTrickPersistence.initialize();
-			MemoryMoviePersistence.initialize();
+			MemoryTrickRepository.initialize();
+			MemoryMovieRepository.initialize();
 		} else {
 			throw new IllegalArgumentException("Unsupported storage");
 		}
@@ -36,29 +36,29 @@ public abstract class PersistenceService {
 		}
 	}
 
-	public static Repository<Trick> getTrickPersistence() {
+	public static Repository<Trick> getTrickRepository() {
 		Context.getCurrentLogger().finer("Get the persistence layer for Tricks.");
 
 		checkStorage();
 
 		if (STORAGE.equals(Storage.MONGO)) {
-			return MongoTrickPersistence.getInstance();
+			return MongoTrickRepository.getInstance();
 		} else if (STORAGE.equals(Storage.MEMORY)) {
-			return MemoryTrickPersistence.getINSTANCE();
+			return MemoryTrickRepository.getINSTANCE();
 		} else {
 			throw new IllegalStateException("Unsupported storage");
 		}
 	}
 
-	public static Repository<Movie> getMoviePersistence() {
+	public static Repository<Movie> getMovieRepository() {
 		Context.getCurrentLogger().finer("Get the persistence layer for Tricks.");
 
 		checkStorage();
 
 		if (STORAGE.equals(Storage.MONGO)) {
-			return MongoMoviePersistence.getInstance();
+			return MongoMovieRepository.getInstance();
 		} else if (STORAGE.equals(Storage.MEMORY)) {
-			return MemoryMoviePersistence.getInstance();
+			return MemoryMovieRepository.getInstance();
 		} else {
 			throw new IllegalStateException("Unsupported storage");
 		}

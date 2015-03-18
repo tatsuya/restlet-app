@@ -10,15 +10,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-public class MemoryTrickPersistence implements Repository<Trick> {
+public class MemoryTrickRepository implements Repository<Trick> {
 
 	private static Map<String, Trick> tricks;
 
-	private static final MemoryTrickPersistence INSTANCE = new MemoryTrickPersistence();
+	private static final MemoryTrickRepository INSTANCE = new MemoryTrickRepository();
 
-	private MemoryTrickPersistence() {}
+	private MemoryTrickRepository() {}
 
-	public static synchronized MemoryTrickPersistence getINSTANCE() {
+	public static synchronized MemoryTrickRepository getINSTANCE() {
 		return INSTANCE;
 	}
 
