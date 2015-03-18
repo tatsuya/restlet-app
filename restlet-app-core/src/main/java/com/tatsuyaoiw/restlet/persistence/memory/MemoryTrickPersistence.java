@@ -5,10 +5,14 @@ import com.tatsuyaoiw.restlet.persistence.entity.Trick;
 import org.restlet.Context;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
-public class MemoryTrickPersistence extends MemoryPersistenceService implements Repository<Trick> {
+public class MemoryTrickPersistence implements Repository<Trick> {
+
+	private static Map<String, Trick> tricks;
 
 	private static final MemoryTrickPersistence INSTANCE = new MemoryTrickPersistence();
 
@@ -16,6 +20,14 @@ public class MemoryTrickPersistence extends MemoryPersistenceService implements 
 
 	public static synchronized MemoryTrickPersistence getINSTANCE() {
 		return INSTANCE;
+	}
+
+	public static void initialize() {
+		tricks = new HashMap<String, Trick>();
+	}
+
+	public Map<String, Trick> getTricks() {
+		return tricks;
 	}
 
 	@Override

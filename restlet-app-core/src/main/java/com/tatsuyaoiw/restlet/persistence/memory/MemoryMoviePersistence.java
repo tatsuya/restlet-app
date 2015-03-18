@@ -5,10 +5,14 @@ import com.tatsuyaoiw.restlet.persistence.entity.Movie;
 import org.restlet.Context;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
-public class MemoryMoviePersistence extends MemoryPersistenceService implements Repository<Movie> {
+public class MemoryMoviePersistence implements Repository<Movie> {
+
+	private static Map<String, Movie> movies;
 
 	private static final MemoryMoviePersistence INSTANCE = new MemoryMoviePersistence();
 
@@ -16,6 +20,14 @@ public class MemoryMoviePersistence extends MemoryPersistenceService implements 
 
 	public static MemoryMoviePersistence getInstance() {
 		return INSTANCE;
+	}
+
+	public static void initialize() {
+		movies = new HashMap<String, Movie>();
+	}
+
+	public Map<String, Movie> getMovies() {
+		return movies;
 	}
 
 	@Override

@@ -3,10 +3,8 @@ package com.tatsuyaoiw.restlet.persistence;
 import com.tatsuyaoiw.restlet.persistence.entity.Movie;
 import com.tatsuyaoiw.restlet.persistence.entity.Trick;
 import com.tatsuyaoiw.restlet.persistence.memory.MemoryMoviePersistence;
-import com.tatsuyaoiw.restlet.persistence.memory.MemoryPersistenceService;
 import com.tatsuyaoiw.restlet.persistence.memory.MemoryTrickPersistence;
 import com.tatsuyaoiw.restlet.persistence.mongo.MongoMoviePersistence;
-import com.tatsuyaoiw.restlet.persistence.mongo.MongoPersistenceService;
 import com.tatsuyaoiw.restlet.persistence.mongo.MongoTrickPersistence;
 import org.restlet.Context;
 
@@ -22,9 +20,11 @@ public abstract class PersistenceService {
 	public static void initialize(Storage storage) {
 		STORAGE = storage;
 		if (STORAGE.equals(Storage.MONGO)) {
-			MongoPersistenceService.initialize();
+			MongoTrickPersistence.initialize();
+			MongoMoviePersistence.initialize();
 		} else if (STORAGE.equals(Storage.MEMORY)) {
-			MemoryPersistenceService.initialize();
+			MemoryTrickPersistence.initialize();
+			MemoryMoviePersistence.initialize();
 		} else {
 			throw new IllegalArgumentException("Unsupported storage");
 		}
