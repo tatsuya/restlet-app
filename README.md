@@ -28,7 +28,7 @@ You can interact with this application easily using a REST client like [POSTMAN]
 
 ## Database
 
-The persistent layer can be switched between MongoDB and on-memory storage. You can set which storage is used by updating `AppConfig.java`. By default on-memory persistence is used. It means whenever you restart the application all data is just disappeared.
+The persistent layer can be switched between MongoDB and on-memory storage. You can set which storage is used by updating `AppConfig.java`. By default on-memory persistence is used. It means as soon as you restart the application you lose all data.
 
 ## Description
 
