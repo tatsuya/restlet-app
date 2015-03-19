@@ -8,7 +8,7 @@ import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class InMemoryStrategy<T extends Entity> extends RepositoryStrategy<T> {
+public class InMemoryStrategy<T extends Entity> implements RepositoryStrategy<T> {
 
 	private final Map<String, T> storage = new ConcurrentHashMap<String, T>();
 

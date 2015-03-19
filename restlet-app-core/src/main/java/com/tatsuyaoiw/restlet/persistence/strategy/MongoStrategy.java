@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class MongoStrategy<T extends Entity> extends RepositoryStrategy<T> {
+public class MongoStrategy<T extends Entity> implements RepositoryStrategy<T> {
 
 	private final Class<T> type;
 	private final String db;
