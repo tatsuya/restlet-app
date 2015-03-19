@@ -1,7 +1,7 @@
 package com.tatsuyaoiw.restlet.resource.server;
 
 import com.tatsuyaoiw.restlet.persistence.RepositoryManager;
-import com.tatsuyaoiw.restlet.persistence.Storage;
+import com.tatsuyaoiw.restlet.persistence.StrategyType;
 import com.tatsuyaoiw.restlet.representation.MovieRepresentation;
 import org.junit.Assert;
 import org.junit.Before;
@@ -21,7 +21,7 @@ public class MovieListServerResourceTest {
 
 	@Before
 	public void before() throws Exception {
-		RepositoryManager.initialize(Storage.MEMORY);
+		RepositoryManager.initRepositories(StrategyType.MEMORY);
 	}
 
 	@Test

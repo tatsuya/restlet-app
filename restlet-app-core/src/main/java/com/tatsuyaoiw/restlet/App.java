@@ -31,7 +31,7 @@ public class App extends Application {
 		Engine.setLogLevel(Level.FINER);
 		LOGGER.info("Starting application...");
 
-		RepositoryManager.initialize(AppConfig.STORAGE);
+		RepositoryManager.initRepositories(AppConfig.STORAGE);
 
 		// Create a new Restlet component
 		Component component = new Component();

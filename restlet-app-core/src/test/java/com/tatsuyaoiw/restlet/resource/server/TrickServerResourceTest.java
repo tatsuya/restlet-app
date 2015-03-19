@@ -2,7 +2,7 @@ package com.tatsuyaoiw.restlet.resource.server;
 
 import com.tatsuyaoiw.restlet.persistence.RepositoryManager;
 import com.tatsuyaoiw.restlet.persistence.repository.Repository;
-import com.tatsuyaoiw.restlet.persistence.Storage;
+import com.tatsuyaoiw.restlet.persistence.StrategyType;
 import com.tatsuyaoiw.restlet.persistence.entity.Trick;
 import com.tatsuyaoiw.restlet.representation.TrickRepresentation;
 import org.junit.Assert;
@@ -28,7 +28,7 @@ public class TrickServerResourceTest {
 
 	@Before
 	public void before() {
-		RepositoryManager.initialize(Storage.MEMORY);
+		RepositoryManager.initRepositories(StrategyType.MEMORY);
 
 		persistence = RepositoryManager.getTrickRepository();
 

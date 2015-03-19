@@ -1,6 +1,6 @@
 package com.tatsuyaoiw.restlet.persistence;
 
-public enum Storage {
+public enum StrategyType {
 	MONGO,
 	MEMORY;
 }
