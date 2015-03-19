@@ -10,7 +10,7 @@ import com.tatsuyaoiw.restlet.persistence.strategy.MongoStrategy;
 import com.tatsuyaoiw.restlet.persistence.strategy.RepositoryStrategy;
 import org.restlet.Context;
 
-public abstract class RepositoryManager {
+public class RepositoryManager {
 
 	private static StrategyType strategy;
 
