@@ -18,7 +18,7 @@ public class TrickRepositoryTest {
 
 	@Before
 	public void before() throws Exception {
-		TrickRepository.init(new InMemoryStrategy<Trick>());
+		TrickRepository.getInstance().init(new InMemoryStrategy<Trick>());
 	}
 
 	@Test

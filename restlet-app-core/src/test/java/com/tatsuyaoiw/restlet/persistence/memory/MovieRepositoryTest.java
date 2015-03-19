@@ -18,7 +18,7 @@ public class MovieRepositoryTest {
 
 	@Before
 	public void before() throws Exception {
-		MovieRepository.init(new InMemoryStrategy<Movie>());
+		MovieRepository.getInstance().init(new InMemoryStrategy<Movie>());
 	}
 
 	@Test

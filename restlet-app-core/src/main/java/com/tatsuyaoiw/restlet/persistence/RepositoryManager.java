@@ -20,12 +20,14 @@ public abstract class RepositoryManager {
 	 */
 	public static void initialize(Storage storage) {
 		STORAGE = storage;
+		TrickRepository tricks = TrickRepository.getInstance();
+		MovieRepository movies = MovieRepository.getInstance();
 		if (STORAGE.equals(Storage.MONGO)) {
-			TrickRepository.init(new MongoStrategy<Trick>(Trick.class, "mydb", "tricks"));
-			MovieRepository.init(new MongoStrategy<Movie>(Movie.class, "mydb", "movies"));
+			tricks.init(new MongoStrategy<Trick>(Trick.class, "mydb", "tricks"));
+			movies.init(new MongoStrategy<Movie>(Movie.class, "mydb", "movies"));
 		} else if (STORAGE.equals(Storage.MEMORY)) {
-			TrickRepository.init(new InMemoryStrategy<Trick>());
-			MovieRepository.init(new InMemoryStrategy<Movie>());
+			tricks.init(new InMemoryStrategy<Trick>());
+			movies.init(new InMemoryStrategy<Movie>());
 		} else {
 			throw new IllegalArgumentException("Unsupported storage");
 		}
