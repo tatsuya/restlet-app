@@ -36,9 +36,9 @@ public class TrickServerResourceTest {
 		toAdd.setName(NAME_1);
 		toAdd.setDescription(DESC_1);
 
-		Trick added = persistence.add(toAdd);
+		Trick added = persistence.create(toAdd);
 
-		List<Trick> tricks = persistence.findAll();
+		List<Trick> tricks = persistence.list();
 		Assert.assertEquals(1, tricks.size());
 
 		Trick trick = tricks.get(0);
@@ -77,7 +77,7 @@ public class TrickServerResourceTest {
 
 		spy.remove();
 
-		List<Trick> tricks = persistence.findAll();
+		List<Trick> tricks = persistence.list();
 		Assert.assertEquals(0, tricks.size());
 	}
 
@@ -93,7 +93,7 @@ public class TrickServerResourceTest {
 
 		spy.update(toUpdate);
 
-		List<Trick> tricks = persistence.findAll();
+		List<Trick> tricks = persistence.list();
 		Assert.assertEquals(1, tricks.size());
 
 		Trick trick = tricks.get(0);

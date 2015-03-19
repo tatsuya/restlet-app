@@ -31,7 +31,7 @@ public class MovieListServerResource extends ServerResource implements MovieList
 	public List<MovieRepresentation> getMovies() {
 		getLogger().finer("Retrieve the list of movies");
 
-		List<Movie> movies = repository.findAll();
+		List<Movie> movies = repository.list();
 
 		List<MovieRepresentation> movieReprs = new ArrayList<MovieRepresentation>();
 		for (Movie movie : movies) {
@@ -49,7 +49,7 @@ public class MovieListServerResource extends ServerResource implements MovieList
 
 		Movie toAdd = MovieUtils.toMovie(movieReprIn);
 
-		Movie added = repository.add(toAdd);
+		Movie added = repository.create(toAdd);
 
 		MovieRepresentation movieReprOut = MovieUtils.toMovieRepresentation(added);
 

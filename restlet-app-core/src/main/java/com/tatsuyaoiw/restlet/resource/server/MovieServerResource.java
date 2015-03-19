@@ -25,7 +25,7 @@ public class MovieServerResource extends ServerResource implements MovieResource
 
 		repository = RepositoryManager.getMovieRepository();
 
-		movie = repository.findById(id);
+		movie = repository.retrieve(id);
 
 		setExisting(movie != null);
 
@@ -47,7 +47,7 @@ public class MovieServerResource extends ServerResource implements MovieResource
 	public void remove() {
 		getLogger().finer("Removal of movie");
 
-		Boolean isRemoved = repository.remove(id);
+		Boolean isRemoved = repository.delete(id);
 
 		if (!isRemoved) {
 			getLogger().finer("Movie id does not exist");
@@ -67,7 +67,8 @@ public class MovieServerResource extends ServerResource implements MovieResource
 			throw new IllegalArgumentException("Movie with the following id does not exist: " + id);
 		}
 
-		Movie movieOut = repository.update(id, movieIn);
+		movieIn.setId(id);
+		Movie movieOut = repository.update(movieIn);
 
 		getLogger().finer("Movie successfully updated");
 

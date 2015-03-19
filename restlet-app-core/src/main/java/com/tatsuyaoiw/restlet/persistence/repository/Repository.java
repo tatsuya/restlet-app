@@ -17,33 +17,12 @@ public abstract class Repository<T extends Entity> {
 	/**
 	 * Adds a new entity to the database.
 	 *
-	 * @param entity The entity to add.
+	 * @param entity The entity to create.
 	 * @return The newly added entity, especially with its technical identifier, in case it is computed.
 	 */
-	public T add(T entity) {
-		Context.getCurrentLogger().finer("Method add() of " + getClass().getSimpleName() + " called");
-		return strategy.add(entity);
-	}
-
-	/**
-	 * Remove an entity from the database
-	 *
-	 * @param id The identifier of the entity to remove.
-	 * @return True if the entity has been removed
-	 */
-	public Boolean remove(String id) {
-		Context.getCurrentLogger().finer("Method remove() of " + getClass().getSimpleName() + " called");
-		return strategy.remove(id);
-	}
-
-	/**
-	 * Returns a list of entities stored in the database.
-	 *
-	 * @return The list of entities stored in the database.
-	 */
-	public List<T> findAll() {
-		Context.getCurrentLogger().finer("Method findAll() of " + getClass().getSimpleName() + " called");
-		return strategy.list();
+	public T create(T entity) {
+		Context.getCurrentLogger().finer("Method create() of " + getClass().getSimpleName() + " called");
+		return strategy.create(entity);
 	}
 
 	/**
@@ -52,22 +31,41 @@ public abstract class Repository<T extends Entity> {
 	 * @param id The identifier of the entity to find.
 	 * @return The found entity.
 	 */
-	public T findById(String id) {
-		Context.getCurrentLogger().finer("Method findById() of " + getClass().getSimpleName() + " called");
-		return strategy.get(id);
+	public T retrieve(String id) {
+		Context.getCurrentLogger().finer("Method retrieve() of " + getClass().getSimpleName() + " called");
+		return strategy.retrieve(id);
 	}
 
 	/**
 	 * Update an existing entity.
 	 *
-	 * @param id The identifier of the entity to update.
 	 * @param entity The new state of the entity
 	 * @return The updated entity.
 	 */
-	public T update(String id, T entity) {
+	public T update(T entity) {
 		Context.getCurrentLogger().finer("Method update() of " + getClass().getSimpleName() + " called");
-		entity.setId(id);
 		return strategy.update(entity);
+	}
+
+	/**
+	 * Remove an entity from the database
+	 *
+	 * @param id The identifier of the entity to delete.
+	 * @return True if the entity has been removed
+	 */
+	public Boolean delete(String id) {
+		Context.getCurrentLogger().finer("Method delete() of " + getClass().getSimpleName() + " called");
+		return strategy.delete(id);
+	}
+
+	/**
+	 * Returns a list of entities stored in the database.
+	 *
+	 * @return The list of entities stored in the database.
+	 */
+	public List<T> list() {
+		Context.getCurrentLogger().finer("Method list() of " + getClass().getSimpleName() + " called");
+		return strategy.list();
 	}
 
 }

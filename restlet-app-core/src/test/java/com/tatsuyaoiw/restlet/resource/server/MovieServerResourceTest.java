@@ -36,9 +36,9 @@ public class MovieServerResourceTest {
 		toAdd.setTitle(TITLE_1);
 		toAdd.setUrl(URL_1);
 
-		Movie added = repository.add(toAdd);
+		Movie added = repository.create(toAdd);
 
-		List<Movie> movies = repository.findAll();
+		List<Movie> movies = repository.list();
 		Assert.assertEquals(1, movies.size());
 
 		Movie trick = movies.get(0);
@@ -77,7 +77,7 @@ public class MovieServerResourceTest {
 
 		spy.remove();
 
-		List<Movie> movies = repository.findAll();
+		List<Movie> movies = repository.list();
 		Assert.assertEquals(0, movies.size());
 	}
 
@@ -93,7 +93,7 @@ public class MovieServerResourceTest {
 
 		spy.update(toUpdate);
 
-		List<Movie> movies = repository.findAll();
+		List<Movie> movies = repository.list();
 		Assert.assertEquals(1, movies.size());
 
 		Movie movie = movies.get(0);

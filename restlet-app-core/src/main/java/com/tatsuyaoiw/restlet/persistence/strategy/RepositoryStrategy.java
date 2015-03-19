@@ -6,14 +6,14 @@ import java.util.List;
 
 public interface RepositoryStrategy<T extends Entity> {
 
-	T add(T entity);
+	T create(T entity);
 
 	List<T> list();
 
-	T get(String id);
+	T retrieve(String id);
 
 	T update(T entity);
 
-	boolean remove(String id);
+	boolean delete(String id);
 
 }

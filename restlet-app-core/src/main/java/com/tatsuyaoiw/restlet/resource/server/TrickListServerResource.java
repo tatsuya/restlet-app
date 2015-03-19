@@ -34,7 +34,7 @@ public class TrickListServerResource extends ServerResource implements TrickList
 	public List<TrickRepresentation> getTricks() {
 		getLogger().finer("Retrieve the list of tricks");
 
-		List<Trick> tricks = repository.findAll();
+		List<Trick> tricks = repository.list();
 
 		List<TrickRepresentation> trickReprs = new ArrayList<TrickRepresentation>();
 		for (Trick trick : tricks) {
@@ -54,7 +54,7 @@ public class TrickListServerResource extends ServerResource implements TrickList
 		Trick trickIn = TrickUtils.toTrick(trickRepr);
 
 		// Add new trick in DB and retrieve created trick
-		Trick trickOut = repository.add(trickIn);
+		Trick trickOut = repository.create(trickIn);
 
 		TrickRepresentation result = TrickUtils.toTrickRepresentation(trickOut);
 

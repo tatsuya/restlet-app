@@ -22,23 +22,23 @@ public class TrickRepositoryTest {
 	}
 
 	@Test
-	public void testAdd() throws Exception {
+	public void testCreate() throws Exception {
 		TrickRepository repository = TrickRepository.getInstance();
 
-		List<Trick> tricks = repository.findAll();
+		List<Trick> tricks = repository.list();
 		Assert.assertEquals(0, tricks.size());
 
 		Trick toAdd = new Trick();
 		toAdd.setName(NAME_1);
 		toAdd.setDescription(DESC_1);
 
-		Trick added = repository.add(toAdd);
+		Trick added = repository.create(toAdd);
 
 		Assert.assertNotNull(added.getId());
 		Assert.assertEquals(NAME_1, added.getName());
 		Assert.assertEquals(DESC_1, added.getDescription());
 
-		tricks = repository.findAll();
+		tricks = repository.list();
 		Assert.assertEquals(1, tricks.size());
 
 		Trick trick = tricks.get(0);
@@ -48,42 +48,19 @@ public class TrickRepositoryTest {
 	}
 
 	@Test
-	public void testRemove() throws Exception {
+	public void testRetrieve() throws Exception {
 		TrickRepository repository = TrickRepository.getInstance();
 
 		Trick toAdd = new Trick();
 		toAdd.setName(NAME_1);
 		toAdd.setDescription(DESC_1);
 
-		Trick added = repository.add(toAdd);
+		Trick added = repository.create(toAdd);
 
-		List<Trick> tricks = repository.findAll();
+		List<Trick> tricks = repository.list();
 		Assert.assertEquals(1, tricks.size());
 
-		Boolean isRemoved = repository.remove(added.getId());
-		Assert.assertTrue(isRemoved);
-
-		isRemoved = repository.remove(added.getId());
-		Assert.assertFalse("should already be removed", isRemoved);
-
-		tricks = repository.findAll();
-		Assert.assertEquals(0, tricks.size());
-	}
-
-	@Test
-	public void testFindById() throws Exception {
-		TrickRepository repository = TrickRepository.getInstance();
-
-		Trick toAdd = new Trick();
-		toAdd.setName(NAME_1);
-		toAdd.setDescription(DESC_1);
-
-		Trick added = repository.add(toAdd);
-
-		List<Trick> tricks = repository.findAll();
-		Assert.assertEquals(1, tricks.size());
-
-		Trick trick = repository.findById(added.getId());
+		Trick trick = repository.retrieve(added.getId());
 		Assert.assertEquals(added.getId(), trick.getId());
 		Assert.assertEquals(NAME_1, trick.getName());
 		Assert.assertEquals(DESC_1, trick.getDescription());
@@ -97,31 +74,55 @@ public class TrickRepositoryTest {
 		toAdd.setName(NAME_1);
 		toAdd.setDescription(DESC_1);
 
-		Trick added = repository.add(toAdd);
+		Trick added = repository.create(toAdd);
 
 		Assert.assertNotNull(added.getId());
 		Assert.assertEquals(NAME_1, added.getName());
 		Assert.assertEquals(DESC_1, added.getDescription());
 
-		List<Trick> tricks = repository.findAll();
+		List<Trick> tricks = repository.list();
 		Assert.assertEquals(1, tricks.size());
 
 		Trick toUpdate = new Trick();
+		toUpdate.setId(added.getId());
 		toUpdate.setName(NAME_2);
 		toUpdate.setDescription(DESC_2);
 
-		Trick updated = repository.update(added.getId(), toUpdate);
+		Trick updated = repository.update(toUpdate);
 		Assert.assertEquals(added.getId(), updated.getId());
 		Assert.assertEquals(NAME_2, updated.getName());
 		Assert.assertEquals(DESC_2, updated.getDescription());
 
-		tricks = repository.findAll();
+		tricks = repository.list();
 		Assert.assertEquals(1, tricks.size());
 
 		Trick trick = tricks.get(0);
 		Assert.assertEquals(updated.getId(), trick.getId());
 		Assert.assertEquals(NAME_2, trick.getName());
 		Assert.assertEquals(DESC_2, trick.getDescription());
+	}
+
+	@Test
+	public void testDelete() throws Exception {
+		TrickRepository repository = TrickRepository.getInstance();
+
+		Trick toAdd = new Trick();
+		toAdd.setName(NAME_1);
+		toAdd.setDescription(DESC_1);
+
+		Trick added = repository.create(toAdd);
+
+		List<Trick> tricks = repository.list();
+		Assert.assertEquals(1, tricks.size());
+
+		Boolean isRemoved = repository.delete(added.getId());
+		Assert.assertTrue(isRemoved);
+
+		isRemoved = repository.delete(added.getId());
+		Assert.assertFalse("should already be removed", isRemoved);
+
+		tricks = repository.list();
+		Assert.assertEquals(0, tricks.size());
 	}
 
 }

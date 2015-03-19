@@ -34,7 +34,7 @@ public class TrickServerResource extends ServerResource implements TrickResource
 		// Initialize the persistence layer
 		repository = RepositoryManager.getTrickRepository();
 
-		trick = repository.findById(id);
+		trick = repository.retrieve(id);
 
 		// Check if retrieved trick is not null. If it is null it means that the given id is wrong.
 		setExisting(trick != null);
@@ -58,7 +58,7 @@ public class TrickServerResource extends ServerResource implements TrickResource
 		getLogger().finer("Removal of trick");
 
 		// Remove trick in DB
-		Boolean isRemoved = repository.remove(id);
+		Boolean isRemoved = repository.delete(id);
 
 		if (!isRemoved) {
 			getLogger().finer("Trick id does not exist");
@@ -78,7 +78,8 @@ public class TrickServerResource extends ServerResource implements TrickResource
 			throw new IllegalArgumentException("Trick with the following id does not exist: " + id);
 		}
 
-		Trick trickOut = repository.update(id, trickIn);
+		trickIn.setId(id);
+		Trick trickOut = repository.update(trickIn);
 
 		getLogger().finer("Trick successfully updated");
 

@@ -47,7 +47,7 @@ public class MongoStrategy<T extends Entity> implements RepositoryStrategy<T> {
 	}
 
 	@Override
-	public T add(T entity) {
+	public T create(T entity) {
 		BasicDBObject doc = (BasicDBObject) JSON.parse(JsonUtils.serialize(entity));
 		getCollection().insert(doc);
 		entity.setId(doc.getString("_id"));
@@ -72,7 +72,7 @@ public class MongoStrategy<T extends Entity> implements RepositoryStrategy<T> {
 	}
 
 	@Override
-	public T get(String id) {
+	public T retrieve(String id) {
 		T entity = null;
 		BasicDBObject query =  new BasicDBObject("_id", new ObjectId(id));
 		DBCursor cursor = getCollection().find(query);
@@ -98,7 +98,7 @@ public class MongoStrategy<T extends Entity> implements RepositoryStrategy<T> {
 	}
 
 	@Override
-	public boolean remove(String id) {
+	public boolean delete(String id) {
 		BasicDBObject query = new BasicDBObject("_id", new ObjectId(id));
 		WriteResult result = getCollection().remove(query);
 		return result.getN() != 0;

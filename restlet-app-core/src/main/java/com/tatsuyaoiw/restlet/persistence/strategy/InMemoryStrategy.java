@@ -13,7 +13,7 @@ public class InMemoryStrategy<T extends Entity> implements RepositoryStrategy<T>
 	private final Map<String, T> storage = new ConcurrentHashMap<String, T>();
 
 	@Override
-	public T add(T entity) {
+	public T create(T entity) {
 		String id = UUID.randomUUID().toString();
 		entity.setId(id);
 		storage.put(id, entity);
@@ -26,7 +26,7 @@ public class InMemoryStrategy<T extends Entity> implements RepositoryStrategy<T>
 	}
 
 	@Override
-	public T get(String id) {
+	public T retrieve(String id) {
 		return storage.get(id);
 	}
 
@@ -37,7 +37,7 @@ public class InMemoryStrategy<T extends Entity> implements RepositoryStrategy<T>
 	}
 
 	@Override
-	public boolean remove(String id) {
+	public boolean delete(String id) {
 		return storage.remove(id) != null;
 	}
 
