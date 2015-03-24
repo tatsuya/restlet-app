@@ -65,7 +65,6 @@ public class App extends Application {
 		directory.setDeeplyAccessible(true);
 
 		Router router = new Router(getContext());
-		router.attach("/web", directory);
 
 		// Attach server resources to the given URL template.
 		// For instance, TrickListServerResource is attached
@@ -77,6 +76,8 @@ public class App extends Application {
 		router.attach("/movies", MovieListServerResource.class);
 		router.attach("/movies/", MovieListServerResource.class);
 		router.attach("/movies/{id}", MovieServerResource.class);
+
+		router.attach("/web", directory);
 
 		return router;
 	}
