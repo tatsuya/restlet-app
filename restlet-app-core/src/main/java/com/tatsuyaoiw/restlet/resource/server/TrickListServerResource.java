@@ -30,7 +30,6 @@ public class TrickListServerResource extends ServerResource implements TrickList
 		getLogger().finer("Initialization of TrickListServerResource ended.");
 	}
 
-	@Override
 	public List<TrickRepresentation> getTricks() {
 		getLogger().finer("Retrieve the list of tricks");
 
@@ -46,7 +45,6 @@ public class TrickListServerResource extends ServerResource implements TrickList
 		return trickReprs;
 	}
 
-	@Override
 	public TrickRepresentation add(TrickRepresentation trickRepr) {
 		getLogger().finer("Add a new trick");
 

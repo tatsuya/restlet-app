@@ -27,7 +27,6 @@ public class MovieListServerResource extends ServerResource implements MovieList
 		getLogger().finer("Initialization of TrickListServerResource ended.");
 	}
 
-	@Override
 	public List<MovieRepresentation> getMovies() {
 		getLogger().finer("Retrieve the list of movies");
 
@@ -43,7 +42,6 @@ public class MovieListServerResource extends ServerResource implements MovieList
 		return movieReprs;
 	}
 
-	@Override
 	public MovieRepresentation add(MovieRepresentation movieReprIn) {
 		getLogger().finer("Add a new movie");
 

@@ -32,7 +32,6 @@ public class MovieServerResource extends ServerResource implements MovieResource
 		getLogger().finer("Initialization of " + getClass().getSimpleName() + " ended with movie id: " + id);
 	}
 
-	@Override
 	public MovieRepresentation getMovie() {
 		getLogger().finer("Retrieve a movie");
 
@@ -43,7 +42,6 @@ public class MovieServerResource extends ServerResource implements MovieResource
 		return movieRepr;
 	}
 
-	@Override
 	public void remove() {
 		getLogger().finer("Removal of movie");
 
@@ -57,7 +55,6 @@ public class MovieServerResource extends ServerResource implements MovieResource
 		getLogger().finer("Movie successfully removed");
 	}
 
-	@Override
 	public MovieRepresentation update(MovieRepresentation movieReprIn) {
 		getLogger().finer("Update a movie");
 

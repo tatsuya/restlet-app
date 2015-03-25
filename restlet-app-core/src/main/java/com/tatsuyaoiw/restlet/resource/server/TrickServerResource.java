@@ -42,7 +42,6 @@ public class TrickServerResource extends ServerResource implements TrickResource
 		getLogger().finer("Initialization of TrickServerResource ended with trick id: " + id);
 	}
 
-	@Override
 	public TrickRepresentation getTrick() {
 		getLogger().finer("Retrieve a trick");
 
@@ -53,7 +52,6 @@ public class TrickServerResource extends ServerResource implements TrickResource
 		return trickRepr;
 	}
 
-	@Override
 	public void remove() {
 		getLogger().finer("Removal of trick");
 
@@ -68,7 +66,6 @@ public class TrickServerResource extends ServerResource implements TrickResource
 		getLogger().finer("Trick successfully removed");
 	}
 
-	@Override
 	public TrickRepresentation update(TrickRepresentation trickReprIn) {
 		getLogger().finer("Update a trick");
 
